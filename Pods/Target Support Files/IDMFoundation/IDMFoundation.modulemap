@@ -1,0 +1,6 @@
+framework module IDMFoundation {
+  umbrella header "IDMFoundation-umbrella.h"
+
+  export *
+  module * { export * }
+}
