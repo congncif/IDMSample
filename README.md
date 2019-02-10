@@ -6,7 +6,7 @@ I think Apple provides us a good tool, but turning it into an excellent tool or 
 
 Many people have talked about the benefits and harms of using the Storyboard. Today I do not repeat those things, I will only talk about ways to turn the disadvantages of storyboard into good.
 
-Why are people afraid of the Storyboard?
+# Why are people afraid of the Storyboard?
 
 ## 1) Merge Conflict
 
