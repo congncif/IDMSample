@@ -1,7 +1,6 @@
 CONFIGURATION_BUILD_DIR = ${PODS_CONFIGURATION_BUILD_DIR}/IDMFoundation
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire" "${PODS_CONFIGURATION_BUILD_DIR}/IDMCore" "${PODS_CONFIGURATION_BUILD_DIR}/Localize-Swift" "${PODS_CONFIGURATION_BUILD_DIR}/MBProgressHUD" "${PODS_CONFIGURATION_BUILD_DIR}/ObjectMapper" "${PODS_CONFIGURATION_BUILD_DIR}/SiFUtilities" "${PODS_CONFIGURATION_BUILD_DIR}/UIImage+FixOrientation" "${PODS_CONFIGURATION_BUILD_DIR}/ViewStateCore"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire" "${PODS_CONFIGURATION_BUILD_DIR}/IDMCore" "${PODS_CONFIGURATION_BUILD_DIR}/Localize-Swift" "${PODS_CONFIGURATION_BUILD_DIR}/MBProgressHUD" "${PODS_CONFIGURATION_BUILD_DIR}/ObjectMapper" "${PODS_CONFIGURATION_BUILD_DIR}/SiFUtilities" "${PODS_CONFIGURATION_BUILD_DIR}/UIImage+FixOrientation"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-OTHER_LDFLAGS = $(inherited) -framework "AVFoundation" -framework "Alamofire" -framework "CoreData" -framework "CoreGraphics" -framework "Foundation" -framework "IDMCore" -framework "Localize_Swift" -framework "MBProgressHUD" -framework "MobileCoreServices" -framework "ObjectMapper" -framework "Photos" -framework "QuartzCore" -framework "SiFUtilities" -framework "UIImage_FixOrientation" -framework "UIKit" -framework "ViewStateCore"
 OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)

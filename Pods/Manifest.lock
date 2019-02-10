@@ -1,39 +1,50 @@
 PODS:
-  - Alamofire (4.7.3)
-  - IDMCore (2.7.2)
-  - IDMFoundation/Alamofire (1.10.0):
+  - Alamofire (4.8.1)
+  - IDMCore (2.8.11)
+  - IDMFoundation (2.0.0):
+    - IDMFoundation/Default (= 2.0.0)
+  - IDMFoundation/Alamofire (2.0.0):
     - Alamofire
     - IDMCore
-    - IDMFoundation/RequestParameter
+    - IDMFoundation/Networking
     - SiFUtilities
-  - IDMFoundation/Core (1.10.0):
+  - IDMFoundation/CameraAsset (2.0.0):
+    - IDMFoundation/Networking
+    - SiFUtilities
+  - IDMFoundation/Core (2.0.0):
     - IDMCore
     - SiFUtilities
-  - IDMFoundation/MBProgressHUD (1.10.0):
+  - IDMFoundation/Default (2.0.0):
+    - IDMFoundation/Alamofire
+    - IDMFoundation/CameraAsset
+    - IDMFoundation/Core
+    - IDMFoundation/MBProgressHUD
+    - IDMFoundation/Networking
+    - IDMFoundation/ObjectMapper
+  - IDMFoundation/MBProgressHUD (2.0.0):
     - IDMCore
     - MBProgressHUD
     - SiFUtilities
-  - IDMFoundation/ObjectMapper (1.10.0):
-    - IDMCore
-    - IDMFoundation/Core
-    - ObjectMapper
-  - IDMFoundation/RequestParameter (1.10.0):
+  - IDMFoundation/Networking (2.0.0):
     - IDMCore
     - IDMFoundation/Core
     - SiFUtilities
     - "UIImage+FixOrientation"
-  - IDMFoundation/ViewState (1.10.0):
-    - ViewStateCore
+  - IDMFoundation/ObjectMapper (2.0.0):
+    - IDMCore
+    - IDMFoundation/Core
+    - ObjectMapper
   - Localize-Swift (2.0.0)
   - MBProgressHUD (1.1.0)
-  - ObjectMapper (3.4.1)
-  - SDWebImage (4.4.2):
-    - SDWebImage/Core (= 4.4.2)
-  - SDWebImage/Core (4.4.2)
-  - SiFUtilities (4.0.10):
-    - SiFUtilities/Default (= 4.0.10)
-  - SiFUtilities/Core (4.0.10)
-  - SiFUtilities/Default (4.0.10):
+  - ModuleX (1.0.1)
+  - ObjectMapper (3.4.2)
+  - SDWebImage (4.4.5):
+    - SDWebImage/Core (= 4.4.5)
+  - SDWebImage/Core (4.4.5)
+  - SiFUtilities (4.1.1):
+    - SiFUtilities/Default (= 4.1.1)
+  - SiFUtilities/Core (4.1.1)
+  - SiFUtilities/Default (4.1.1):
     - SiFUtilities/Core
     - SiFUtilities/Endpoint
     - SiFUtilities/Helpers
@@ -45,32 +56,31 @@ PODS:
     - SiFUtilities/Runtime
     - SiFUtilities/Show
     - SiFUtilities/WeakObject
-  - SiFUtilities/Endpoint (4.0.10)
-  - SiFUtilities/Helpers (4.0.10)
-  - SiFUtilities/IBDesignable (4.0.10):
+  - SiFUtilities/Endpoint (4.1.1)
+  - SiFUtilities/Helpers (4.1.1)
+  - SiFUtilities/IBDesignable (4.1.1):
     - SiFUtilities/Core
-  - SiFUtilities/KeyValue (4.0.10)
-  - SiFUtilities/Loading (4.0.10)
-  - SiFUtilities/Localize (4.0.10):
+  - SiFUtilities/KeyValue (4.1.1)
+  - SiFUtilities/Loading (4.1.1)
+  - SiFUtilities/Localize (4.1.1):
     - Localize-Swift
-  - SiFUtilities/Nib (4.0.10):
     - SiFUtilities/Core
-  - SiFUtilities/Runtime (4.0.10)
-  - SiFUtilities/Show (4.0.10):
+    - SiFUtilities/Runtime
+  - SiFUtilities/Nib (4.1.1):
+    - SiFUtilities/Core
+  - SiFUtilities/Runtime (4.1.1)
+  - SiFUtilities/Show (4.1.1):
     - SiFUtilities/Core
     - SiFUtilities/Localize
-  - SiFUtilities/WeakObject (4.0.10)
+  - SiFUtilities/WeakObject (4.1.1)
   - "UIImage+FixOrientation (1.0.0)"
-  - ViewStateCore (1.0.1)
+  - ViewStateCore (1.1.3)
 
 DEPENDENCIES:
-  - IDMFoundation/Alamofire
-  - IDMFoundation/Core
-  - IDMFoundation/MBProgressHUD
-  - IDMFoundation/ObjectMapper
-  - IDMFoundation/RequestParameter
-  - IDMFoundation/ViewState
+  - IDMFoundation
+  - ModuleX
   - SDWebImage
+  - ViewStateCore
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -79,6 +89,7 @@ SPEC REPOS:
     - IDMFoundation
     - Localize-Swift
     - MBProgressHUD
+    - ModuleX
     - ObjectMapper
     - SDWebImage
     - SiFUtilities
@@ -86,17 +97,18 @@ SPEC REPOS:
     - ViewStateCore
 
 SPEC CHECKSUMS:
-  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
-  IDMCore: 255aeb9fb781e5e3999f611e99f774de3bde37eb
-  IDMFoundation: 1452c9abfcd64e7bf1baf733338345893f16a1de
+  Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
+  IDMCore: 67ba57b62d81f71577cd4d3bd3d87b96e46b87f7
+  IDMFoundation: 4b986cfaecf84ee52bb0facaa5723b584b8043a6
   Localize-Swift: c798ec9286494866f7068f85f7c71283ac5bdab4
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
-  ObjectMapper: 5311bd50ca732930959e7ca1a2de43ab823a5ced
-  SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
-  SiFUtilities: c72760f5150def958606558383376d66f327e088
+  ModuleX: 6143a0848b5586c2d1b2cad0cfacddff046b6d64
+  ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
+  SDWebImage: ecc03494e973b93b80213649d32175f8d2d17d4d
+  SiFUtilities: b110d4a5565a0c110e8fa4c1303b1f1af0880ccf
   "UIImage+FixOrientation": 6889ce14a2761462c22d6f92d26685db79a0c9b2
-  ViewStateCore: faa016ec98d4d80b87136228c89e97a63c4d4f07
+  ViewStateCore: 4d66fc1d8c4d11b8cf4dc768e261f425b9dbf116
 
-PODFILE CHECKSUM: cc5b8221dc2efa348a02085a13ae1208790e6408
+PODFILE CHECKSUM: 2e3f69a3e349b4d4b99db15eba448173d3a2451c
 
-COCOAPODS: 1.6.0.beta.2
+COCOAPODS: 1.6.0.rc.2

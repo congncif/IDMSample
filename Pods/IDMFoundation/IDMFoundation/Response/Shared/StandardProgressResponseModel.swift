@@ -12,7 +12,7 @@ open class StandardProgressResponseModel: ProgressModelProtocol {
     public var progress: Progress?
     public var isDelaying: Bool = false
 
-    public required init?(fromData data: Any?) throws {
+    public required init(fromData data: Any?) throws {
         if let _progress = data as? Progress {
             progress = _progress
             isDelaying = true
@@ -20,12 +20,16 @@ open class StandardProgressResponseModel: ProgressModelProtocol {
             isDelaying = false
         }
     }
+    
+    open var invalidDataError: Error? {
+        return nil
+    }
 }
 
 open class StandardProgressDataResponseModel<D: ModelProtocol>: StandardProgressResponseModel where D.DataType == Any {
     public var data: D?
 
-    public required init?(fromData data: Any?) throws {
+    public required init(fromData data: Any?) throws {
         do {
             try super.init(fromData: data)
             self.data = try D(fromData: data)
@@ -34,7 +38,7 @@ open class StandardProgressDataResponseModel<D: ModelProtocol>: StandardProgress
         }
     }
 
-    open var invalidDataError: Error? {
+    open override var invalidDataError: Error? {
         return data?.invalidDataError
     }
 }

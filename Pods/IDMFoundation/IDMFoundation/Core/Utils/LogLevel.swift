@@ -7,22 +7,38 @@
 
 import Foundation
 
-public enum LogLevel: String {
-    case debug
-    case none
-}
-
 public class LogConfiguration {
+    public enum LogLevel: String {
+        case debug
+        case none
+    }
+
     public static var level: LogLevel = .debug
 }
 
-public func log(_ items: Any..., separator: String = " ", terminator: String = "❀") {
+public func log(_ items: Any...) {
     switch LogConfiguration.level {
     case .none:
         break
     case .debug:
-        print(items, separator: separator, terminator: terminator)
+        print(items)
     }
 }
 
+func log(url: URL?, mark: String, data: Any?) {
+    switch LogConfiguration.level {
+    case .none:
+        break
+    case .debug:
+        print("🚀🚀🚀")
+        print(url ?? URL(fileURLWithPath: ""))
 
+        print(mark + mark + mark)
+        if let message = data as? [String: Any] {
+            let output = message as NSDictionary
+            print(output)
+        } else {
+            print(String(describing: data))
+        }
+    }
+}

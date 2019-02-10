@@ -1,16 +1,16 @@
 /**
  Copyright (c) 2016 Nguyen Chi Cong
- 
+
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  copies of the Software, and to permit persons to whom the Software is
  furnished to do so, subject to the following conditions:
- 
+
  The above copyright notice and this permission notice shall be included in
  all copies or substantial portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -30,28 +30,12 @@
 
 import Foundation
 
-public struct IDMError: LocalizedError {
-    public static let modelCannotInitialize = IDMError(message: NSLocalizedString("Model cannot initialize", comment: ""))
-    
-    public var message: String
-    public var failureReason: String?
-    
-    public init(message: String, reason: String? = nil) {
-        self.message = message
-        self.failureReason = reason
-    }
-    
-    public var errorDescription: String? {
-        return message
-    }
-}
-
 public protocol ModelProtocol {
     associatedtype DataType
-    
+
     init(fromData data: DataType?) throws
     func getData<ReturnType>() throws -> ReturnType
-    
+
     var invalidDataError: Error? { get }
 }
 
@@ -69,11 +53,13 @@ extension SelfModelProtocol {
 extension ModelProtocol {
     public func getData<ReturnType>() throws -> ReturnType {
         if ReturnType.self == Self.self {
-            return self as! ReturnType
+            if let result = self as? ReturnType {
+                return result
+            }
         }
-        throw IDMError(message: "Result Type only accept type \(Self.self)")
+        throw IDMError(message: "*** Cannot getData of type \(Self.self) ***")
     }
-    
+
     public var invalidDataError: Error? {
         return nil
     }
@@ -84,14 +70,62 @@ public struct AutoWrapModel<Type>: ModelProtocol {
     public init(fromData data: Type?) throws {
         self.data = data
     }
-    
+
     public func getData<ReturnType>() throws -> ReturnType {
         if ReturnType.self == Type.self {
-            return data as! ReturnType
+            if let result = data as? ReturnType {
+                return result
+            }
         }
         if ReturnType.self == AutoWrapModel<Type>.self {
-            return self as! ReturnType
+            if let result = self as? ReturnType {
+                return result
+            }
         }
-        throw IDMError(message: "Result Type only accept type \(Type.self) or \(AutoWrapModel<Type>.self)")
+        throw IDMError(message: "*** Cannot getData of type \(Type.self) or \(AutoWrapModel<Type>.self) ***")
+    }
+}
+
+extension ModelProtocol where Self: NSObject, Self: ProgressModelProtocol, Self.DataType == Any {
+    public init(fromData data: Any?) throws {
+        self.init()
+        if let _progress = data as? Progress {
+            progress = _progress
+            isDelaying = true
+        } else {
+            isDelaying = false
+        }
+    }
+}
+
+extension ModelProtocol where Self: NSObject, Self: ProgressDataModelProtocol, Self.DataType == Any, Self.D: ModelProtocol, Self.D.DataType == Any {
+    public init(fromData data: Any?) throws {
+        self.init()
+        if let _progress = data as? Progress {
+            progress = _progress
+            isDelaying = true
+        } else {
+            isDelaying = false
+            do {
+                self.data = try D(fromData: data)
+            } catch let ex {
+                throw ex
+            }
+        }
+    }
+}
+
+extension ModelProtocol where Self: NSObject, Self: ProgressDataModelProtocol, Self.DataType == Any {
+    public init(fromData data: Any?) throws {
+        self.init()
+        if let _progress = data as? Progress {
+            progress = _progress
+            isDelaying = true
+        } else {
+            isDelaying = false
+            if let res = data as? D {
+                self.data = res
+            }
+        }
     }
 }

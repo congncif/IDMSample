@@ -1,23 +1,14 @@
 //
-import Alamofire
 //  MultipartFormData+Parameter.swift
 //  IDMCommon
 //
 //  Created by NGUYEN CHI CONG on 8/29/17.
 //  Copyright © 2017 NGUYEN CHI CONG. All rights reserved.
 //
-
+import Alamofire
 import Foundation
 
 extension MultipartFormData {
-    open func append(urlItem: URLUploadItemProtocol) {
-        if let fileName = urlItem.fileName, let mime = urlItem.mimeType {
-            self.append(urlItem.uploadUrl, withName: urlItem.uploadName, fileName: fileName, mimeType: mime)
-        } else {
-            self.append(urlItem.uploadUrl, withName: urlItem.uploadName)
-        }
-    }
-    
     open func append(query: StringKeyValueProtocol?) {
         guard let q = query else {
             return
@@ -29,41 +20,32 @@ extension MultipartFormData {
         }
     }
     
-    open func append(urlParameter: UploadURLsParameter) {
-        for item in urlParameter.uploadItems {
-            self.append(urlItem: item)
-        }
-        self.append(query: urlParameter.query)
-    }
-}
-
-extension MultipartFormData {
-    open func append(urlItem: UploadFileParameterProtocol) {
-        switch urlItem.type {
+    open func append(fileItem: UploadFileParameterProtocol) {
+        switch fileItem.type {
         case .data(let data):
-            if let mime = urlItem.mimeType {
-                if let fileName = urlItem.fileName {
-                    self.append(data, withName: urlItem.name, fileName: fileName, mimeType: mime)
+            if let mime = fileItem.mimeType {
+                if let fileName = fileItem.fileName {
+                    self.append(data, withName: fileItem.name, fileName: fileName, mimeType: mime)
                 } else {
-                    self.append(data, withName: urlItem.name, mimeType: mime)
+                    self.append(data, withName: fileItem.name, mimeType: mime)
                 }
             } else {
-                self.append(data, withName: urlItem.name)
+                self.append(data, withName: fileItem.name)
             }
         case .fileUrl(let url):
-            if let mime = urlItem.mimeType, let fileName = urlItem.fileName {
-                self.append(url, withName: urlItem.name, fileName: fileName, mimeType: mime)
+            if let mime = fileItem.mimeType, let fileName = fileItem.fileName {
+                self.append(url, withName: fileItem.name, fileName: fileName, mimeType: mime)
                 
             } else {
-                self.append(url, withName: urlItem.name)
+                self.append(url, withName: fileItem.name)
             }
         }
     }
     
-    open func append(urlParameter: UploadFilesParameter) {
-        for item in urlParameter.uploadItems {
-            self.append(urlItem: item)
+    open func append(fileParameter: UploadFilesParameterProtocol) {
+        for item in fileParameter.uploadItems {
+            self.append(fileItem: item)
         }
-        self.append(query: urlParameter.query)
+        self.append(query: fileParameter.query)
     }
 }

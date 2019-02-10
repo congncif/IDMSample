@@ -17,8 +17,7 @@ public class ResponseModelConfiguration {
     
     public static let shared = ResponseModelConfiguration()
     
-    private init() {
-    }
+    private init() {}
     
     public var messageKey: String = SerializationKeys.message
     public var statusKey: String = SerializationKeys.status

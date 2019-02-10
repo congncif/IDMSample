@@ -1,0 +1,6 @@
+framework module ModuleX {
+  umbrella header "ModuleX-umbrella.h"
+
+  export *
+  module * { export * }
+}

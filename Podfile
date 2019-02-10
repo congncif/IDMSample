@@ -6,12 +6,9 @@ target 'IDMSample' do
   use_frameworks!
 
   # Pods for IDMSample
-  pod 'IDMFoundation/Core'
-  pod 'IDMFoundation/Alamofire'
-  pod 'IDMFoundation/RequestParameter'
-  pod 'IDMFoundation/ObjectMapper'
-  pod 'IDMFoundation/ViewState'
-  pod 'IDMFoundation/MBProgressHUD'
+  pod 'IDMFoundation'
+  pod 'ModuleX'
+  pod 'ViewStateCore'
   
   pod 'SDWebImage'
 
