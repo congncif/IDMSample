@@ -17,9 +17,14 @@ Perhaps code conflicts are a headache for all teams but it is important that wit
 ## 2) Reusability
 
 Storyboard does not enhance reuse. Normally for each module, layout is less reused. For small components on the reused interface many times, you can **use xib files or code programming** such as *UITableViewCell*, *UICollectionViewCell* or *CustomView*. Also you can embed **ContainerView** to custom view, it is able to resuse across between Storyboard files.
+
+<img src="https://i.imgur.com/D5v5Pihm.png"/>
+
 As for the layout design of the entire module it is made for each module and we don't want to reuse it for another module.
 
 ## 3) Custom ViewController inititializer to inject dependencies
+
+*The example uses IDMFoundation Template, you can install this template here https://github.com/congncif/IDMFoundation*
 
 When not using Dependency Injection, you may have difficulty with how to solve the problem of initializing dependencies especially with VIPER or using protocol oriented programing.
 I have solved this problem with a Dependency Bridge which will initialize all dependencies in an NSObject with the Storyboard View Controller.
@@ -45,6 +50,8 @@ In `SearchUserViewController`, declare a connectable bridge: `@IBOutlet var brid
 Drag an object into Storyboard, set custom class to SearchUserBridge. Then connect it to property of `SearchUserViewController`.
 
 Once done, you have made Storyboard to become a Builder.
+
+<img src="https://i.imgur.com/sK19DTnl.png"/>
 
 ## 4) Coupled view controllers
 
@@ -83,4 +90,7 @@ class SearchUserSegue: UIStoryboardSegue, SearchUserOutputProtocol {
 }
 ```
 Once done. Then we use `UIStoryboardReference` and custom Segue class to connect everything.
+
+<img src="https://i.imgur.com/38rHA8Kl.png"/>
+
 
