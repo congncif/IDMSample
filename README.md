@@ -12,9 +12,12 @@ Many people have talked about the benefits and harms of using the Storyboard. To
 
 Perhaps code conflicts are a headache for all teams but it is important that with xib files or storyboards once confused, it is often difficult to resolve. However, Apple has listened to this. These files are less confict. Currently, you can use separate storyboard files for each different screen so you can fully work on a separate storyboard file with others.
 
+*Read more here*: https://medium.com/@stasost/xcode-a-better-way-to-deal-with-storyboards-8b6a8b504c06
+
 ## 2) Reusability
 
-Storyboard does not enhance reuse. Normally for each module, layout is less reused. For small components on the reused interface many times, you can use xib files or code programming such as UITableViewCell, UICollectionViewCell or CustomView. As for the layout design of the entire module it is made for each module and we don't want to reuse it for another module.
+Storyboard does not enhance reuse. Normally for each module, layout is less reused. For small components on the reused interface many times, you can **use xib files or code programming** such as *UITableViewCell*, *UICollectionViewCell* or *CustomView*. Also you can embed **ContainerView** to custom view, it is able to resuse across between Storyboard files.
+As for the layout design of the entire module it is made for each module and we don't want to reuse it for another module.
 
 ## 3) Custom ViewController inititializer to inject dependencies
 
@@ -48,7 +51,7 @@ Once done, you have made Storyboard to become a Builder.
 The navigation in the ios application makes ViewController confusing, because it needs to know about other view controllers it wants to navigate to. This makes the viewControllers hooked together rigidly.
 Therefore, VIPER has defined an object called Router / Wireframe to replace ViewController's task. For architectures that do not define a router like MVC, MVP or MVVM, this problem remains unresolved. Therefore, many experts have defined an additional object called Coordinator.
 
-https://www.raywenderlich.com/158-coordinator-tutorial-for-ios-getting-started
+*Read more:* https://www.raywenderlich.com/158-coordinator-tutorial-for-ios-getting-started
 
 Storyboard has UIStoryboardSegue to make navigation more magical but most people don't like to use it because with normal usage everything is still tied together. 
 
