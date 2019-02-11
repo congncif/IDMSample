@@ -15,7 +15,6 @@ import IDMFoundation
 /// In SearchUserViewController, replace SearchUserControllerProtocol by SearchUserControllerBridgeProtocol.
 
 class SearchUserDependencyBridge: NSObject {
-    var router: SearchUserRouterProtocol?
     var presenter: SearchUserPresenterProtocol!
     var integrator: SearchUserAbstractIntegrator!
 }
@@ -25,7 +24,6 @@ protocol SearchUserControllerBridgeProtocol: SearchUserControllerProtocol {
 }
 
 extension SearchUserControllerBridgeProtocol {
-    var router: SearchUserRouterProtocol? { return bridge.router }
     var presenter: SearchUserPresenterProtocol! { return bridge.presenter }
     var integrator: SearchUserAbstractIntegrator! { return bridge.integrator }
 }

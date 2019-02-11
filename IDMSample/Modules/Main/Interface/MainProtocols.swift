@@ -18,6 +18,10 @@ protocol MainControllerProtocol {
     var router: MainRouterProtocol? { get }
 }
 
+extension MainControllerProtocol {
+    var router: MainRouterProtocol? { return nil }
+}
+
 protocol MainPresenterProtocol {
     var state: MainViewState { get }
 
@@ -27,8 +31,8 @@ protocol MainPresenterProtocol {
 
 // Go in module
 
-public protocol MainBuilderProtocol: ModuleBuilderProtocol {
-    func findInNavigationContainer(from source: ModuleInterface) -> MainModuleInterface?
+public protocol MainBuilderProtocol {
+    func build() -> MainModuleInterface
 }
 
 // Go out module

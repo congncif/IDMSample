@@ -23,6 +23,10 @@ protocol SearchUserControllerProtocol {
     func performSearch(query: String, displayer: DisplayHandlerProtocol)
 }
 
+extension SearchUserControllerProtocol {
+    var router: SearchUserRouterProtocol? { return nil }
+}
+
 protocol SearchUserPresenterProtocol {
     var state: SearchUserViewState { get }
 

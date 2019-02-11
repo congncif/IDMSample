@@ -16,7 +16,6 @@ import IDMFoundation
 /// In MainViewController, replace MainControllerProtocol by MainControllerBridgeProtocol.
 
 class MainDependencyBridge: NSObject {
-    var router: MainRouterProtocol?
     var presenter: MainPresenterProtocol!
 }
 
@@ -28,6 +27,4 @@ extension MainControllerBridgeProtocol {
     var presenter: MainPresenterProtocol! {
         return bridge.presenter
     }
-    
-    var router: MainRouterProtocol? { return bridge.router }
 }
