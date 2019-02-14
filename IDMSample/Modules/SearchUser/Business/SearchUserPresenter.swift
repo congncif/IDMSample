@@ -7,10 +7,6 @@
 //
 
 import Foundation
-import IDMCore
-import IDMFoundation
-import ModuleX
-import ViewStateCore
 
 class SearchUserPresenter: NSObject, SearchUserPresenterProtocol {
     let state: SearchUserViewState

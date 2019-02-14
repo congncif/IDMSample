@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import IDMCore
-import IDMFoundation
 
 /// Use DependencyBridge to inject abstract `presenter` and `integrator`.
 /// They are Swift types so cannot declare as Objective C types.

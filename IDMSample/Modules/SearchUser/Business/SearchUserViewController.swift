@@ -7,12 +7,7 @@
 //
 
 import Foundation
-import IDMCore
-import IDMFoundation
-import ModuleX
-import SDWebImage
 import UIKit
-import ViewStateCore
 
 public class SearchUserViewController: UIViewController, SearchUserControllerBridgeProtocol, SearchUserModuleInterface {
     @IBOutlet var bridge: SearchUserDependencyBridge!

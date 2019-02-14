@@ -7,10 +7,6 @@
 //
 
 import Foundation
-import IDMCore
-import IDMFoundation
-import ModuleX
-import ViewStateCore
 
 class MainPresenter: NSObject, MainPresenterProtocol {
     let state: MainViewState

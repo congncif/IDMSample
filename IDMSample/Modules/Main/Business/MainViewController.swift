@@ -7,11 +7,7 @@
 //
 
 import Foundation
-import IDMCore
-import IDMFoundation
-import ModuleX
 import UIKit
-import ViewStateCore
 
 public class MainViewController: UIViewController, MainControllerBridgeProtocol, MainModuleInterface {
     @IBOutlet var bridge: MainDependencyBridge!

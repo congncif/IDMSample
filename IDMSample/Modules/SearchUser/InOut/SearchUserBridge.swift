@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import IDMCore
-import IDMFoundation
 
 class SearchUserBridge: SearchUserDependencyBridge {
     override init() {
