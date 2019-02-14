@@ -17,61 +17,6 @@ public struct Subscriber: Equatable {
     }
 }
 
-public protocol ViewStateRenderable: ViewStateSubscriber {
-    func render(state: ViewState)
-}
-
-public protocol ViewStateSubscriber: AnyObject {
-    func viewStateDidChange(newState: ViewState)
-    
-    // Optional
-    
-    // Useful to show animation
-    func viewStateDidChange(newState: ViewState, keyPath: String, oldValue: Any?, newValue: Any?)
-    
-    // Subscribing
-    func subscribeStateChange(_ state: ViewState)
-    func unsubscribeStateChange(_ state: ViewState)
-    
-    // Listening subscribing
-    func viewStateDidSubscribe(_ state: ViewState)
-    func viewStateWillUnsubscribe(_ state: ViewState)
-}
-
-extension ViewStateSubscriber {
-    public func subscribeStateChange(_ state: ViewState) {
-        state.register(subscriber: self)
-    }
-    
-    public func unsubscribeStateChange(_ state: ViewState) {
-        state.unregister(subscriber: self)
-    }
-}
-
-public extension ViewStateSubscriber {
-    public func viewStateDidChange(newState: ViewState, keyPath: String, oldValue: Any?, newValue: Any?) {
-        // default do nothing
-    }
-    
-    public func viewStateDidSubscribe(_ state: ViewState) {
-        // default do nothing
-    }
-    
-    public func viewStateWillUnsubscribe(_ state: ViewState) {
-        // default do nothing
-    }
-}
-
-public extension ViewStateRenderable {
-    public func viewStateDidChange(newState: ViewState) {
-        render(state: newState)
-    }
-    
-    public func viewStateDidSubscribe(_ state: ViewState) {
-        render(state: state)
-    }
-}
-
 open class ViewState: NSObject, ViewStateSubscriber {
     enum IgnoreKey: String, CaseIterable {
         case subscribers
@@ -92,51 +37,19 @@ open class ViewState: NSObject, ViewStateSubscriber {
             _delegate = newValue
             
             if let value = newValue {
-                value.viewStateDidSubscribe(self)
+                notifyviewStateDidSubscribe(to: value)
             }
         }
     }
     
     fileprivate weak var _delegate: ViewStateSubscriber?
     
-    public var keys: [String] {
-        var results = [String]()
-        let otherSelf = Mirror(reflecting: self)
-        
-        for child in otherSelf.children {
-            if let key = child.label {
-                results.append(key)
-            }
-        }
-        
-        var mirror: Mirror = otherSelf
-        
-        while let superMirror = mirror.superclassMirror {
-            for child in superMirror.children {
-                if let key = child.label {
-                    results.append(key)
-                }
-            }
-            mirror = superMirror
-        }
-        
-        return results
-    }
-    
     open var ignoreKeys: [String] {
-        return IgnoreKey.allCases.map { $0.rawValue }
+        return []
     }
     
     open var allowedKeys: [String] {
         return []
-    }
-    
-    fileprivate var workingKeys: [String] {
-        var workingKeys = keys
-        if allowedKeys.count > 0 {
-            workingKeys = allowedKeys
-        }
-        return workingKeys
     }
     
     public override init() {
@@ -146,7 +59,6 @@ open class ViewState: NSObject, ViewStateSubscriber {
     
     open func addObservers() {
         for key in workingKeys {
-            guard !ignoreKeys.contains(key) else { continue }
             addObserver(self, forKeyPath: key, options: [.old, .new], context: nil)
             
             if let subState = self.value(forKey: key) as? ViewState {
@@ -157,7 +69,6 @@ open class ViewState: NSObject, ViewStateSubscriber {
     
     open func removeObservers() {
         for key in workingKeys {
-            guard !ignoreKeys.contains(key) else { continue }
             removeObserver(self, forKeyPath: key)
         }
     }
@@ -169,8 +80,9 @@ open class ViewState: NSObject, ViewStateSubscriber {
         if !subscribers.contains(_subscriber) {
             subscribers.append(_subscriber)
             
-            let target = _subscriber.target
-            target?.viewStateDidSubscribe(self)
+            if let target = _subscriber.target {
+                notifyviewStateDidSubscribe(to: target)
+            }
         }
     }
     
@@ -193,7 +105,7 @@ open class ViewState: NSObject, ViewStateSubscriber {
     }
     
     open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-        guard let key = keyPath, !ignoreKeys.contains(key) else { return }
+        guard let key = keyPath, workingKeys.contains(key) else { return }
         
         let oldValue = change?[NSKeyValueChangeKey.oldKey]
         let newValue = change?[NSKeyValueChangeKey.newKey]
@@ -237,13 +149,83 @@ open class ViewState: NSObject, ViewStateSubscriber {
     @objc open func viewStateDidChange(newState: ViewState, keyPath: String, oldValue: Any?, newValue: Any?) {
         notifyStateDidChange(newState: newState, keyPath: keyPath, oldValue: oldValue, newValue: newValue)
     }
-    
-    fileprivate func key(for value: ViewState) -> String? {
+}
+
+fileprivate extension ViewState {
+    func key(for value: ViewState) -> String? {
         for aKey in workingKeys {
             if let val = self.value(forKeyPath: aKey) as? ViewState, val == value {
                 return aKey
             }
         }
         return nil
+    }
+    
+    var allIgnoreKeys: [String] {
+        return ignoreKeys + IgnoreKey.allCases.map { $0.rawValue }
+    }
+    
+    var keys: [String] {
+        var results = [String]()
+        let otherSelf = Mirror(reflecting: self)
+        
+        for child in otherSelf.children {
+            if let key = child.label {
+                results.append(key)
+            }
+        }
+        
+        var mirror: Mirror = otherSelf
+        
+        while let superMirror = mirror.superclassMirror {
+            for child in superMirror.children {
+                if let key = child.label {
+                    results.append(key)
+                }
+            }
+            mirror = superMirror
+        }
+        
+        return results
+    }
+}
+
+internal extension ViewState {
+    var workingKeys: [String] {
+        var workingKeys = keys
+        if allowedKeys.count > 0 {
+            workingKeys = allowedKeys
+        }
+        let igKeys = allIgnoreKeys
+        workingKeys = workingKeys.filter { !igKeys.contains($0) }
+        
+        return workingKeys
+    }
+    
+    var children: [ViewState] {
+        return workingKeys.compactMap { [weak self] (key) -> ViewState? in
+            if let val = self?.value(forKeyPath: key) as? ViewState {
+                return val
+            }
+            return nil
+        }
+    }
+    
+    var deepStates: [ViewState] {
+        let _children = children
+        if _children.count > 0 {
+            return _children.reduce([self], { (result, child) -> [ViewState] in
+                result + child.deepStates
+            })
+        } else {
+            return [self]
+        }
+    }
+    
+    func notifyviewStateDidSubscribe(to subscriber: ViewStateSubscriber) {
+        let allStates = deepStates
+        allStates.forEach { currentState in
+            subscriber.viewStateDidSubscribe(currentState)
+        }
     }
 }
