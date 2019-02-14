@@ -16,9 +16,7 @@ import ViewStateCore
 public class MainViewController: UIViewController, MainControllerBridgeProtocol, MainModuleInterface {
     @IBOutlet var bridge: MainDependencyBridge!
 
-    var mainView: MainView {
-        return view as! MainView
-    }
+    private var mainView: MainView { return view as! MainView }
 
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,22 +26,23 @@ public class MainViewController: UIViewController, MainControllerBridgeProtocol,
         // Keep this at end of viewDidLoad
         mainView.subscribeStateChange(state)
     }
-    
+
     public func selectUser(_ user: SearchUserModel) {
         presenter.selectUser(user)
     }
 }
 
+// Routing & Actions
 extension MainViewController {
-    @IBAction func textFieldDidChange(_ textField: UITextField) {
-        presenter.setQuery(textField.text)
-    }
-    
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let segue = segue as? MainOutputProtocol {
             segue.openSearchModule(with: state.currentQuery)
         }
     }
-    
-    @IBAction func unwindToMain(segue: UIStoryboardSegue) {}
+
+    @IBAction private func unwindToMain(segue: UIStoryboardSegue) {}
+
+    @IBAction private func textFieldDidChange(_ textField: UITextField) {
+        presenter.setQuery(textField.text)
+    }
 }

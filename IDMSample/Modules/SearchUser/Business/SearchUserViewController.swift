@@ -17,7 +17,7 @@ import ViewStateCore
 public class SearchUserViewController: UIViewController, SearchUserControllerBridgeProtocol, SearchUserModuleInterface {
     @IBOutlet var bridge: SearchUserDependencyBridge!
     @IBOutlet var usersArrayController: SearchUserArrayController!
-    
+
     @IBOutlet weak var tableView: UITableView!
 
     public override func viewDidLoad() {
@@ -30,20 +30,19 @@ public class SearchUserViewController: UIViewController, SearchUserControllerBri
     public override func viewDidFinishLayout() {
         performSearch(query: state.currentQuery, displayer: self)
     }
-    
+
     public func start(with query: String) {
         presenter.start(with: query)
     }
 }
 
-extension SearchUserViewController {
-    var users: [SearchUserModel] {
-        return state.users
-    }
+private extension SearchUserViewController {
+    var users: [SearchUserModel] { return state.users }
 }
 
+// Routing & Actions
 extension SearchUserViewController {
-    @IBAction func refreshButtonDidTap() {
+    @IBAction private func refreshButtonDidTap() {
         performSearch(query: state.currentQuery, displayer: self)
     }
 
