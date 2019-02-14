@@ -36,10 +36,6 @@ public class SearchUserViewController: UIViewController, SearchUserControllerBri
     }
 }
 
-private extension SearchUserViewController {
-    var users: [SearchUserModel] { return state.users }
-}
-
 // Routing & Actions
 extension SearchUserViewController {
     @IBAction private func refreshButtonDidTap() {
