@@ -13,7 +13,7 @@ import ModuleX
 import ViewStateCore
 
 class SearchUserPresenter: NSObject, SearchUserPresenterProtocol {
-    private(set) var state: SearchUserViewState
+    let state: SearchUserViewState
 
     public override init() {
         state = SearchUserViewState()

@@ -13,7 +13,7 @@ import ModuleX
 import ViewStateCore
 
 class MainPresenter: NSObject, MainPresenterProtocol {
-    private(set) var state: MainViewState
+    let state: MainViewState
 
     override init() {
         let newState = MainViewState()
