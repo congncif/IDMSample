@@ -41,10 +41,10 @@ PODS:
   - SDWebImage (4.4.5):
     - SDWebImage/Core (= 4.4.5)
   - SDWebImage/Core (4.4.5)
-  - SiFUtilities (4.1.1):
-    - SiFUtilities/Default (= 4.1.1)
-  - SiFUtilities/Core (4.1.1)
-  - SiFUtilities/Default (4.1.1):
+  - SiFUtilities (4.1.2):
+    - SiFUtilities/Default (= 4.1.2)
+  - SiFUtilities/Core (4.1.2)
+  - SiFUtilities/Default (4.1.2):
     - SiFUtilities/Core
     - SiFUtilities/Endpoint
     - SiFUtilities/Helpers
@@ -56,23 +56,23 @@ PODS:
     - SiFUtilities/Runtime
     - SiFUtilities/Show
     - SiFUtilities/WeakObject
-  - SiFUtilities/Endpoint (4.1.1)
-  - SiFUtilities/Helpers (4.1.1)
-  - SiFUtilities/IBDesignable (4.1.1):
+  - SiFUtilities/Endpoint (4.1.2)
+  - SiFUtilities/Helpers (4.1.2)
+  - SiFUtilities/IBDesignable (4.1.2):
     - SiFUtilities/Core
-  - SiFUtilities/KeyValue (4.1.1)
-  - SiFUtilities/Loading (4.1.1)
-  - SiFUtilities/Localize (4.1.1):
+  - SiFUtilities/KeyValue (4.1.2)
+  - SiFUtilities/Loading (4.1.2)
+  - SiFUtilities/Localize (4.1.2):
     - Localize-Swift
     - SiFUtilities/Core
     - SiFUtilities/Runtime
-  - SiFUtilities/Nib (4.1.1):
+  - SiFUtilities/Nib (4.1.2):
     - SiFUtilities/Core
-  - SiFUtilities/Runtime (4.1.1)
-  - SiFUtilities/Show (4.1.1):
+  - SiFUtilities/Runtime (4.1.2)
+  - SiFUtilities/Show (4.1.2):
     - SiFUtilities/Core
     - SiFUtilities/Localize
-  - SiFUtilities/WeakObject (4.1.1)
+  - SiFUtilities/WeakObject (4.1.2)
   - "UIImage+FixOrientation (1.0.0)"
   - ViewStateCore (1.2.2)
 
@@ -105,7 +105,7 @@ SPEC CHECKSUMS:
   ModuleX: 6143a0848b5586c2d1b2cad0cfacddff046b6d64
   ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
   SDWebImage: ecc03494e973b93b80213649d32175f8d2d17d4d
-  SiFUtilities: b110d4a5565a0c110e8fa4c1303b1f1af0880ccf
+  SiFUtilities: a1dcc3308f8fb986ed45f2ab30364fa8bb6e122c
   "UIImage+FixOrientation": 6889ce14a2761462c22d6f92d26685db79a0c9b2
   ViewStateCore: b080a6506a24ef2f8a9731252d6704dae105ce92
 

@@ -14,12 +14,6 @@ class SearchUserViewState: ViewState {
     @objc fileprivate(set) dynamic var users: [SearchUserModel] = []
 }
 
-extension SearchUserViewState {
-    var currentQuery: String {
-        return query ?? ""
-    }
-}
-
 extension SearchUserPresenterProtocol {
     func start(with query: String) {
         state.query = query

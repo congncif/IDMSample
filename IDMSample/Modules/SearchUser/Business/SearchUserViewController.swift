@@ -23,7 +23,7 @@ public class SearchUserViewController: UIViewController, SearchUserControllerBri
     }
 
     public override func viewDidFinishLayout() {
-        performSearch(query: state.currentQuery, displayer: self)
+        performSearch(query: state.query.unwrapped(), displayer: self)
     }
 
     public func start(with query: String) {
@@ -34,7 +34,7 @@ public class SearchUserViewController: UIViewController, SearchUserControllerBri
 // Routing & Actions
 extension SearchUserViewController {
     @IBAction private func refreshButtonDidTap() {
-        performSearch(query: state.currentQuery, displayer: self)
+        performSearch(query: state.query.unwrapped(), displayer: self)
     }
 
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -205,6 +205,48 @@
 			path = InOut;
 			sourceTree = "<group>";
 		};
+		0ABB273F2216C3A7004D82F8 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				0ABB27402216C3B8004D82F8 /* Routes */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		0ABB27402216C3B8004D82F8 /* Routes */ = {
+			isa = PBXGroup;
+			children = (
+				0A15859B22107AD6002B123B /* GitHubEndpoint.swift */,
+				0A15859C22107AD6002B123B /* NetworkRoutes.swift */,
+			);
+			path = Routes;
+			sourceTree = "<group>";
+		};
+		0ABB27422216C3DC004D82F8 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				0ABB27442216C4A5004D82F8 /* IDMCore */,
+				0ABB27432216C3E4004D82F8 /* UIExtensions */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		0ABB27432216C3E4004D82F8 /* UIExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				0A15859922107AD5002B123B /* UIViewController++.swift */,
+			);
+			path = UIExtensions;
+			sourceTree = "<group>";
+		};
+		0ABB27442216C4A5004D82F8 /* IDMCore */ = {
+			isa = PBXGroup;
+			children = (
+				0A15859A22107AD6002B123B /* Network++.swift */,
+			);
+			path = IDMCore;
+			sourceTree = "<group>";
+		};
 		20855DB721A3A9C20073159F = {
 			isa = PBXGroup;
 			children = (
@@ -270,10 +312,8 @@
 		20855DF621A3BA470073159F /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				0A15859B22107AD6002B123B /* GitHubEndpoint.swift */,
-				0A15859A22107AD6002B123B /* Network++.swift */,
-				0A15859C22107AD6002B123B /* NetworkRoutes.swift */,
-				0A15859922107AD5002B123B /* UIViewController++.swift */,
+				0ABB27422216C3DC004D82F8 /* Base */,
+				0ABB273F2216C3A7004D82F8 /* Network */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
