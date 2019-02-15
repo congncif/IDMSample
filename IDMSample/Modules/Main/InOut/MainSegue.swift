@@ -9,13 +9,18 @@
 import Foundation
 import UIKit
 
-class MainSegue: UIStoryboardSegue, MainOutputProtocol {
+class MainSegue: UIStoryboardSegue, MainRouterProtocol {
     func openSearchModule(with query: String) {
         target?.start(with: query)
+        target?.output = current
     }
     
-	var target: SearchUserInputProtocol? {
-		return destination as? SearchUserInputProtocol
+	var target: SearchUserModuleInterface? {
+		return destination as? SearchUserModuleInterface
+    }
+    
+    var current: MainModuleInterface? {
+        return source as? MainModuleInterface
     }
 
     override var identifier: String? {

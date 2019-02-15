@@ -11,7 +11,7 @@ import Foundation
 class SearchUserPresenter: NSObject, SearchUserPresenterProtocol {
     let state: SearchUserViewState
 
-    public override init() {
+    override init() {
         state = SearchUserViewState()
         super.init()
     }

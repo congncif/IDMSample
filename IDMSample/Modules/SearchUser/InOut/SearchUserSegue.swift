@@ -9,15 +9,7 @@
 import Foundation
 import UIKit
 
-class SearchUserSegue: UIStoryboardSegue, SearchUserOutputProtocol {
-    func userDidSelect(_ user: SearchUserModel) {
-        target?.selectUser(user)
-    }
-    
-    var target: MainInputProtocol? {
-        return destination as? MainInputProtocol
-    }
-    
+class SearchUserSegue: UIStoryboardSegue, SearchUserRouterProtocol {
     override var identifier: String? {
         return typeName
     }

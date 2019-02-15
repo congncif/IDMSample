@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 public class MainViewController: UIViewController, MainControllerBridgeProtocol, MainModuleInterface {
+    public weak var output: MainOutputProtocol?
+
     @IBOutlet var bridge: MainDependencyBridge!
 
     private var mainView: MainView { return view as! MainView }
@@ -22,8 +24,8 @@ public class MainViewController: UIViewController, MainControllerBridgeProtocol,
         // Keep this at end of viewDidLoad
         mainView.subscribeStateChange(state)
     }
-
-    public func selectUser(_ user: SearchUserModel) {
+    
+    public func userDidSelect(_ user: SearchUserModel) {
         presenter.selectUser(user)
     }
 }
@@ -31,7 +33,7 @@ public class MainViewController: UIViewController, MainControllerBridgeProtocol,
 // Routing & Actions
 extension MainViewController {
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let segue = segue as? MainOutputProtocol {
+        if let segue = segue as? MainRouterProtocol {
             segue.openSearchModule(with: state.currentQuery)
         }
     }

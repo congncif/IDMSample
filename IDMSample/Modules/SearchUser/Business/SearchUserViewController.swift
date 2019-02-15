@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 public class SearchUserViewController: UIViewController, SearchUserControllerBridgeProtocol, SearchUserModuleInterface {
+    public weak var output: SearchUserOutputProtocol?
+
     @IBOutlet var bridge: SearchUserDependencyBridge!
     @IBOutlet var usersArrayController: SearchUserArrayController!
 
@@ -36,11 +38,11 @@ extension SearchUserViewController {
     @IBAction private func refreshButtonDidTap() {
         performSearch(query: state.query.unwrapped(), displayer: self)
     }
+}
 
-    public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let segue = segue as? SearchUserOutputProtocol, let indexPath = tableView.indexPathForSelectedRow {
-            let model = state.users[indexPath.row]
-            segue.userDidSelect(model)
-        }
+extension SearchUserViewController: UITableViewDelegate {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model = state.users[indexPath.row]
+        output?.userDidSelect(model)
     }
 }

@@ -11,7 +11,9 @@ import IDMCore
 import IDMFoundation
 import ModuleX
 
-public protocol SearchUserModuleInterface: ModuleInterface, SearchUserInputProtocol {}
+public protocol SearchUserModuleInterface: ModuleInterface, SearchUserInputProtocol {
+    var output: SearchUserOutputProtocol? { get set }
+}
 
 protocol SearchUserControllerProtocol {
     var router: SearchUserRouterProtocol? { get }
@@ -39,7 +41,7 @@ public protocol SearchUserBuilderProtocol {
     func build() -> SearchUserModuleInterface
 }
 
-protocol SearchUserRouterProtocol: SearchUserOutputProtocol {}
+protocol SearchUserRouterProtocol {}
 
 // In/Out
 
@@ -47,6 +49,6 @@ public protocol SearchUserInputProtocol {
     func start(with query: String)
 }
 
-protocol SearchUserOutputProtocol {
+public protocol SearchUserOutputProtocol: class {
     func userDidSelect(_ user: SearchUserModel)
 }
