@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 public class MainViewController: UIViewController, MainControllerBridgeProtocol, MainModuleInterface {
-    public weak var output: MainOutputProtocol?
+    public var output: MainOutputProtocol?
 
     @IBOutlet var bridge: MainDependencyBridge!
 
@@ -24,8 +24,10 @@ public class MainViewController: UIViewController, MainControllerBridgeProtocol,
         // Keep this at end of viewDidLoad
         mainView.subscribeStateChange(state)
     }
-    
-    public func userDidSelect(_ user: SearchUserModel) {
+}
+
+extension MainViewController: MainInputProtocol {
+    public func selectUser(_ user: SearchUserModel) {
         presenter.selectUser(user)
     }
 }

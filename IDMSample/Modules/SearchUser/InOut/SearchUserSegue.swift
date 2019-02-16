@@ -9,7 +9,9 @@
 import Foundation
 import UIKit
 
-class SearchUserSegue: UIStoryboardSegue, SearchUserRouterProtocol {
+class SearchUserSegue: UIStoryboardSegue, SearchUserRouterProtocol {}
+
+extension SearchUserSegue {
     override var identifier: String? {
         return typeName
     }

@@ -49,6 +49,6 @@ public protocol SearchUserInputProtocol {
     func start(with query: String)
 }
 
-public protocol SearchUserOutputProtocol: class {
+public protocol SearchUserOutputProtocol {
     func userDidSelect(_ user: SearchUserModel)
 }

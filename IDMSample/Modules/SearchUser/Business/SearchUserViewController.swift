@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 public class SearchUserViewController: UIViewController, SearchUserControllerBridgeProtocol, SearchUserModuleInterface {
-    public weak var output: SearchUserOutputProtocol?
+    public var output: SearchUserOutputProtocol?
 
     @IBOutlet var bridge: SearchUserDependencyBridge!
     @IBOutlet var usersArrayController: SearchUserArrayController!
