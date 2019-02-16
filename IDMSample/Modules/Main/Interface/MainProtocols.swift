@@ -31,14 +31,6 @@ protocol MainPresenterProtocol {
     func setQuery(_ query: String?)
 }
 
-// Go in module
-
-public protocol MainBuilderProtocol {
-    func build() -> MainModuleInterface
-}
-
-// Go out module
-
 protocol MainRouterProtocol {
     func openSearchModule(with query: String)
 }
