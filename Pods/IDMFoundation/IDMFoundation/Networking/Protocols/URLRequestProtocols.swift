@@ -12,11 +12,11 @@ public protocol URLRequestAdapting {
 }
 
 public protocol URLRequestBuildable: RequestBuildable {
-    func urlRequestAdapters(_ parameters: ParameterType?) -> [URLRequestAdapting]
+    func urlRequestAdapters(_ parameters: RequestParameterType?) -> [URLRequestAdapting]
 }
 
 extension URLRequestBuildable {
-    public func buildAdaptiveURLRequest(with parameters: ParameterType?) throws -> URLRequest {
+    public func buildAdaptiveURLRequest(with parameters: RequestParameterType?) throws -> URLRequest {
         var newRequest = try buildURLRequest(with: parameters)
 
         // Adapt URLRequest with config timeout, cachePolicy, etc...
@@ -34,7 +34,7 @@ public protocol SimpleURLRequestBuildable: URLRequestBuildable {
 }
 
 extension SimpleURLRequestBuildable {
-    public func urlRequestAdapters(_ parameters: ParameterType?) -> [URLRequestAdapting] {
+    public func urlRequestAdapters(_ parameters: RequestParameterType?) -> [URLRequestAdapting] {
         return urlRequestAdapters
     }
 }

@@ -9,7 +9,7 @@ import Alamofire
 import Foundation
 import SiFUtilities
 
-// #2
+// MARK: - #1 SessionManager / Networking
 
 public protocol AlamofireSessionManagable: NetworkSessionManagable {
     var sessionManager: SessionManager { get }
@@ -29,7 +29,7 @@ extension AlamofireSessionManagable {
     }
 }
 
-// #3
+// MARK: - #2 Routable
 
 public protocol AlamofireNetworkRequestRoutable: NetworkRequestRoutable {
     var httpMethod: HTTPMethod { get }
@@ -53,14 +53,14 @@ public struct NetworkRoute: AlamofireNetworkRequestRoutable {
     }
 }
 
-// #4
+// MARK: - #3 URL Request
 
 public protocol AlamofireRequestBuildable: SimpleURLRequestBuildable {
-    func parameterEncoder(_ parameters: ParameterType?) -> ParameterEncoding
+    func parameterEncoder(_ parameters: RequestParameterType?) -> ParameterEncoding
 }
 
-extension AlamofireRequestBuildable where ParameterType: ParameterProtocol {
-    public func buildEncodedRequest(with parameters: ParameterType?) throws -> URLRequest {
+extension AlamofireRequestBuildable where RequestParameterType: ParameterProtocol {
+    public func buildEncodedRequest(with parameters: RequestParameterType?) throws -> URLRequest {
         var newRequest = try buildAdaptiveURLRequest(with: parameters)
 
         let encoder = parameterEncoder(parameters)
@@ -75,13 +75,13 @@ public protocol SimpleAlamofireRequestBuildable: AlamofireRequestBuildable {
 }
 
 extension SimpleAlamofireRequestBuildable {
-    public func parameterEncoder(_ parameters: ParameterType?) -> ParameterEncoding {
+    public func parameterEncoder(_ parameters: RequestParameterType?) -> ParameterEncoding {
         return parameterEncoder
     }
 }
 
-public protocol AlamofireDataRequestProtocol: RouteRequestBuildable, SimpleFlexibleRequestable,
-    SimpleAlamofireRequestBuildable, AlamofireSessionManagable {}
+// MARK: - #4 Base Protocols
 
-public protocol AlamofireRequestProtocol: RouteRequestBuildable, SimpleFlexibleRequestable,
-    SimpleURLRequestBuildable, AlamofireSessionManagable {}
+public protocol AlamofireDataRequestProtocol: NetworkRequestable, SimpleAlamofireRequestBuildable, AlamofireSessionManagable {}
+
+public protocol AlamofireRequestProtocol: NetworkRequestable, SimpleURLRequestBuildable, AlamofireSessionManagable {}

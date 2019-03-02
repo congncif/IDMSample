@@ -1,50 +1,50 @@
 PODS:
   - Alamofire (4.8.1)
-  - IDMCore (2.8.11)
-  - IDMFoundation (2.0.0):
-    - IDMFoundation/Default (= 2.0.0)
-  - IDMFoundation/Alamofire (2.0.0):
+  - IDMCore (2.8.13)
+  - IDMFoundation (2.1.5):
+    - IDMFoundation/Default (= 2.1.5)
+  - IDMFoundation/Alamofire (2.1.5):
     - Alamofire
     - IDMCore
     - IDMFoundation/Networking
     - SiFUtilities
-  - IDMFoundation/CameraAsset (2.0.0):
+  - IDMFoundation/CameraAsset (2.1.5):
     - IDMFoundation/Networking
     - SiFUtilities
-  - IDMFoundation/Core (2.0.0):
+  - IDMFoundation/Core (2.1.5):
     - IDMCore
     - SiFUtilities
-  - IDMFoundation/Default (2.0.0):
+  - IDMFoundation/Default (2.1.5):
     - IDMFoundation/Alamofire
     - IDMFoundation/CameraAsset
     - IDMFoundation/Core
     - IDMFoundation/MBProgressHUD
     - IDMFoundation/Networking
     - IDMFoundation/ObjectMapper
-  - IDMFoundation/MBProgressHUD (2.0.0):
+  - IDMFoundation/MBProgressHUD (2.1.5):
     - IDMCore
     - MBProgressHUD
     - SiFUtilities
-  - IDMFoundation/Networking (2.0.0):
+  - IDMFoundation/Networking (2.1.5):
     - IDMCore
     - IDMFoundation/Core
     - SiFUtilities
     - "UIImage+FixOrientation"
-  - IDMFoundation/ObjectMapper (2.0.0):
+  - IDMFoundation/ObjectMapper (2.1.5):
     - IDMCore
     - IDMFoundation/Core
     - ObjectMapper
   - Localize-Swift (2.0.0)
   - MBProgressHUD (1.1.0)
-  - ModuleX (1.0.1)
+  - ModuleX (1.0.2)
   - ObjectMapper (3.4.2)
-  - SDWebImage (4.4.5):
-    - SDWebImage/Core (= 4.4.5)
-  - SDWebImage/Core (4.4.5)
-  - SiFUtilities (4.1.2):
-    - SiFUtilities/Default (= 4.1.2)
-  - SiFUtilities/Core (4.1.2)
-  - SiFUtilities/Default (4.1.2):
+  - SDWebImage (4.4.6):
+    - SDWebImage/Core (= 4.4.6)
+  - SDWebImage/Core (4.4.6)
+  - SiFUtilities (4.1.5):
+    - SiFUtilities/Default (= 4.1.5)
+  - SiFUtilities/Core (4.1.5)
+  - SiFUtilities/Default (4.1.5):
     - SiFUtilities/Core
     - SiFUtilities/Endpoint
     - SiFUtilities/Helpers
@@ -56,25 +56,25 @@ PODS:
     - SiFUtilities/Runtime
     - SiFUtilities/Show
     - SiFUtilities/WeakObject
-  - SiFUtilities/Endpoint (4.1.2)
-  - SiFUtilities/Helpers (4.1.2)
-  - SiFUtilities/IBDesignable (4.1.2):
+  - SiFUtilities/Endpoint (4.1.5)
+  - SiFUtilities/Helpers (4.1.5)
+  - SiFUtilities/IBDesignable (4.1.5):
     - SiFUtilities/Core
-  - SiFUtilities/KeyValue (4.1.2)
-  - SiFUtilities/Loading (4.1.2)
-  - SiFUtilities/Localize (4.1.2):
+  - SiFUtilities/KeyValue (4.1.5)
+  - SiFUtilities/Loading (4.1.5)
+  - SiFUtilities/Localize (4.1.5):
     - Localize-Swift
     - SiFUtilities/Core
     - SiFUtilities/Runtime
-  - SiFUtilities/Nib (4.1.2):
+  - SiFUtilities/Nib (4.1.5):
     - SiFUtilities/Core
-  - SiFUtilities/Runtime (4.1.2)
-  - SiFUtilities/Show (4.1.2):
+  - SiFUtilities/Runtime (4.1.5)
+  - SiFUtilities/Show (4.1.5):
     - SiFUtilities/Core
     - SiFUtilities/Localize
-  - SiFUtilities/WeakObject (4.1.2)
+  - SiFUtilities/WeakObject (4.1.5)
   - "UIImage+FixOrientation (1.0.0)"
-  - ViewStateCore (1.2.2)
+  - ViewStateCore (1.2.5)
 
 DEPENDENCIES:
   - IDMFoundation
@@ -98,17 +98,17 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
-  IDMCore: 67ba57b62d81f71577cd4d3bd3d87b96e46b87f7
-  IDMFoundation: 4b986cfaecf84ee52bb0facaa5723b584b8043a6
+  IDMCore: 8bb263386f273a1e761332cec20c92fa8a9d5739
+  IDMFoundation: 34e17f2bef29ee60b7d546837b6b56a085bf718f
   Localize-Swift: c798ec9286494866f7068f85f7c71283ac5bdab4
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
-  ModuleX: 6143a0848b5586c2d1b2cad0cfacddff046b6d64
+  ModuleX: c6965f347d31836ddf40b0d803c8ef6571313b1c
   ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
-  SDWebImage: ecc03494e973b93b80213649d32175f8d2d17d4d
-  SiFUtilities: a1dcc3308f8fb986ed45f2ab30364fa8bb6e122c
+  SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
+  SiFUtilities: ccf9f7c1eac2ae14fd71ad2a38075110b2e0305f
   "UIImage+FixOrientation": 6889ce14a2761462c22d6f92d26685db79a0c9b2
-  ViewStateCore: b080a6506a24ef2f8a9731252d6704dae105ce92
+  ViewStateCore: 0978cf1970699368ffe6f8ffdf1452e44e15fa3f
 
 PODFILE CHECKSUM: 2e3f69a3e349b4d4b99db15eba448173d3a2451c
 
-COCOAPODS: 1.6.0
+COCOAPODS: 1.6.1

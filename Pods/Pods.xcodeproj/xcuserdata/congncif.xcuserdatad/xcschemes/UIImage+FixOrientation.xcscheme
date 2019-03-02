@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "86439ECDFE6C8645A813ADB3A35B22C8"
+               BlueprintIdentifier = "F85EF7703F9969F33CEF108A31014F48"
                BuildableName = "UIImage_FixOrientation.framework"
                BlueprintName = "UIImage+FixOrientation"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "86439ECDFE6C8645A813ADB3A35B22C8"
+            BlueprintIdentifier = "F85EF7703F9969F33CEF108A31014F48"
             BuildableName = "UIImage_FixOrientation.framework"
             BlueprintName = "UIImage+FixOrientation"
             ReferencedContainer = "container:Pods.xcodeproj">

@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "27952A544A76DCD0D9C0B87D5B35A8DE"
+               BlueprintIdentifier = "07978C1B762B3E940AE93287D7B168E0"
+               BuildableName = "SiFUtilities.framework"
                BlueprintName = "SiFUtilities"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "SiFUtilities.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

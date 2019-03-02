@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import IDMCore
 import SiFUtilities
 
 extension URLBuildable {
@@ -14,11 +15,31 @@ extension URLBuildable {
     }
 }
 
-extension RouteRequestBuildable where ParameterType: URLBuildable {
-    public func url(_ parameters: ParameterType?) throws -> URL {
+extension RouteRequestBuildable where RequestParameterType: URLBuildable {
+    public func url(_ parameters: RequestParameterType?) throws -> URL {
         if let param = parameters {
             return try param.build(from: route.endpoint)
         }
         return try route.endpoint.path().toURL()
+    }
+}
+
+extension DataProviderProtocol where Self: FlexibleRequestable, ParameterType == Self.RequestParameterType, DataType == Any {
+    public func request(parameters: ParameterType?,
+                        completion: @escaping (Bool, Any?, Error?) -> Void) -> CancelHandler? {
+        return performRequest(with: parameters, completion: completion)
+    }
+
+    public func performRequest(with parameters: ParameterType?,
+                               completion: @escaping (Bool, Any?, Error?) -> Void) -> CancelHandler? {
+        var cancelHandler: CancelHandler?
+        do {
+            let dataRequest = try buildFinalRequest(with: parameters)
+            processRequest(dataRequest, completion: completion)
+            cancelHandler = { self.cancelRequest(dataRequest) }
+        } catch let exception {
+            completion(false, nil, exception)
+        }
+        return cancelHandler
     }
 }

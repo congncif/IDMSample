@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2644BEB7798C175E7C52D533EA5DB7EA"
+               BuildableName = "ModuleX.framework"
                BlueprintName = "ModuleX"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "ModuleX.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

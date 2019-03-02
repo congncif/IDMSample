@@ -11,9 +11,37 @@ import Foundation
 import IDMCore
 import SiFUtilities
 
-public typealias DownloadRequestAdapter = BaseRequestAdapter<DownloadRequest>
+public typealias DownloadRequestAdapter = NetworkRequestAdapter<DownloadRequest>
 
-open class BaseDownloadProvider<Parameter>: NetworkDataProvider<DownloadRequest, Parameter>, SimpleAlamofireRequestBuildable where Parameter: DownloadParameterProtocol {
+extension NetworkResponseHandler where BaseRequest == DownloadRequest {
+    public static let `default` = NetworkResponseHandler<DownloadRequest>(handler: { request, completion in
+        request.downloadProgress { progress in
+            completion(true, progress, nil)
+        }
+        
+        request.response { response in
+            let error = response.error
+            let isSuccess = error == nil
+            if isSuccess {
+                log(url: response.response?.url, mark: "🌸", data: response.destinationURL?.absoluteString)
+            } else {
+                log(url: response.response?.url, mark: "🥀", data: response.error)
+            }
+            completion(isSuccess, response, error)
+        }
+    })
+}
+
+open class BaseDownloadProvider<Parameter>: NetworkDataProvider<DownloadRequest, Parameter>, AlamofireDataRequestProtocol where Parameter: DownloadParameterProtocol {
+    public override init(route: NetworkRequestRoutable,
+                         parameterEncoder: ParameterEncoding = URLEncoding.default,
+                         urlRequestAdapters: [URLRequestAdapting] = [],
+                         requestAdapter: RequestApdapterType? = nil,
+                         responseHandler: ResponseHandlerType = NetworkResponseHandler<DownloadRequest>.default,
+                         sessionManager: SessionManager = .background) {
+        super.init(route: route, parameterEncoder: parameterEncoder, urlRequestAdapters: urlRequestAdapters, requestAdapter: requestAdapter, responseHandler: responseHandler, sessionManager: sessionManager)
+    }
+    
     open override func buildRequest(with parameters: Parameter?) throws -> DownloadRequest {
         var newRequest = try buildEncodedRequest(with: parameters)
         
@@ -33,24 +61,5 @@ open class BaseDownloadProvider<Parameter>: NetworkDataProvider<DownloadRequest,
     
     open override func cancelRequest(_ request: DownloadRequest) {
         request.cancel()
-    }
-    
-    open override func processRequest(_ request: DownloadRequest, completion: @escaping (Bool, Any?, Error?) -> Void) {
-        request.downloadProgress { progress in
-            completion(true, progress, nil)
-        }
-        
-        request.response { response in
-            let error = response.error
-            
-            let isSuccess = error == nil
-            if isSuccess {
-                log(url: response.response?.url, mark: "🌸", data: response.destinationURL?.absoluteString)
-            } else {
-                log(url: response.response?.url, mark: "🥀", data: response.error)
-            }
-            
-            completion(isSuccess, response, error)
-        }
     }
 }

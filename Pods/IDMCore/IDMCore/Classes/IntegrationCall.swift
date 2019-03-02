@@ -40,11 +40,6 @@ public enum NextState {
     case completion
 }
 
-public enum Result<Value> {
-    case success(Value?)
-    case failure(Error?)
-}
-
 public class IntegrationCall<ModelType> {
     fileprivate var doBeginning: (() -> ())?
     fileprivate var doSuccess: ((ModelType?) -> ())?
@@ -65,7 +60,7 @@ public class IntegrationCall<ModelType> {
     internal var retryErrorBlock: ((Error?) -> ())? // retryErrorBlock is higher priority than retryBlock
     internal var retryBlock: (() -> ())?
     
-    fileprivate(set) var callQueue: IntegrationCallQueue = .main
+    fileprivate(set) var callQueue: IntegrationCallQueue = .serial
     fileprivate(set) var callDelay: Double = 0
     
     public internal(set) var integratorIndentifier: String = String()
@@ -210,7 +205,7 @@ public class IntegrationCall<ModelType> {
         return self
     }
     
-    public func call(queue: IntegrationCallQueue = .main, delay: Double = 0) {
+    public func call(queue: IntegrationCallQueue = .serial, delay: Double = 0) {
         callQueue = queue
         callDelay = delay
         callQueue.dispatchQueue.asyncAfter(deadline: .now() + delay) {
@@ -220,7 +215,7 @@ public class IntegrationCall<ModelType> {
     
     public func call<Result>(dependOn requiredCall: IntegrationCall<Result>,
                              with state: NextState = .completion,
-                             queue: IntegrationCallQueue = .main,
+                             queue: IntegrationCallQueue = .serial,
                              delay: Double = 0) {
         callQueue = queue
         callDelay = delay

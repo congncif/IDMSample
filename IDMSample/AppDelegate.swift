@@ -6,6 +6,8 @@
 //  Copyright © 2018 [iF] Solution. All rights reserved.
 //
 
+import IDMCore
+import SiFUtilities
 import UIKit
 
 @UIApplicationMain
@@ -13,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
         return true
     }
 
