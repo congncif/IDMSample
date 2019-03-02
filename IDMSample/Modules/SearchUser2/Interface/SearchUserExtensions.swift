@@ -25,8 +25,19 @@ extension SearchUserControllerProtocol {
 }
 
 extension SearchUserViewActionDelegate where Self: SearchUserControllerProtocol {
+    func refresh() {
+        performSearch()
+    }
+    
     func viewReady() {
-        // <#code here#>
+        performSearch()
+    }
+}
+
+extension SearchUserViewActionDelegate where Self: SearchUserControllerProtocol, Self: SearchUserModuleInterface {
+    func listItemDidSelect(at index: Int) {
+        let model = state.users[index]
+        output?.userDidSelect(model)
     }
 }
 

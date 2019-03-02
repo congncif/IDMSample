@@ -19,6 +19,10 @@ class MainView: UIView, MainViewProtocol {
     var actionDelegate: MainViewActionDelegate? {
         return actionDelegateBridge as? MainViewActionDelegate
     }
+    
+    @IBAction func searchFieldDidChange(_ textField: UITextField) {
+        actionDelegate?.searchQueryDidChange(textField.text!)
+    }
 }
 
 extension MainView: ViewStateFillable {

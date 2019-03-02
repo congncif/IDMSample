@@ -18,6 +18,16 @@ class SearchUserView: UIView, SearchUserViewProtocol {
     var actionDelegate: SearchUserViewActionDelegate? {
         return actionDelegateBridge as? SearchUserViewActionDelegate
     }
+    
+    @IBAction func refreshButtonDidTap() {
+        actionDelegate?.refresh()
+    }
+}
+
+extension SearchUserView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        actionDelegate?.listItemDidSelect(at: indexPath.row)
+    }
 }
 
 // Render ViewState

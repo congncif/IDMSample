@@ -34,6 +34,9 @@ public protocol SearchUserOutputProtocol {
 
 protocol SearchUserViewActionDelegate: class {
     func viewReady()
+    
+    func listItemDidSelect(at index: Int)
+    func refresh()
 }
 
 protocol SearchUserViewProtocol: ViewStateSubscriber {

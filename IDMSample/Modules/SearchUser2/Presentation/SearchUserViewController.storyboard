@@ -70,7 +70,7 @@
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="FMv-Ma-wUf" id="BEr-kX-YYN"/>
-                                    <outlet property="delegate" destination="vKn-9P-Ny8" id="CcS-mD-e8S"/>
+                                    <outlet property="delegate" destination="BNZ-bO-rhc" id="DzV-TP-0Dd"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -91,7 +91,7 @@
                     <navigationItem key="navigationItem" title="Search" id="G1M-hY-gjv">
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="XF9-pA-D6Q">
                             <connections>
-                                <action selector="refreshButtonDidTap" destination="vKn-9P-Ny8" id="7UL-qs-Bwu"/>
+                                <action selector="refreshButtonDidTap" destination="BNZ-bO-rhc" id="w7r-Qb-Nk0"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

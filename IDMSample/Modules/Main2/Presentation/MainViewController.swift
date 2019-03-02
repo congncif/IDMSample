@@ -11,12 +11,11 @@ import UIKit
 import ViewStateCore
 
 public class MainViewController: UIViewController, MainControllerBridgeProtocol, MainViewActionDelegate, MainModuleInterface {
-    
-	public var output: MainOutputProtocol?
+    public var output: MainOutputProtocol?
 
-	@IBOutlet var bridge: MainDependencyBridge!
+    @IBOutlet var bridge: MainDependencyBridge!
 
-	public override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
     }
 }
@@ -34,10 +33,6 @@ extension MainViewController {
             segue.openSearchModule(with: state.queryState.query.unwrapped())
         }
     }
-    
+
     @IBAction private func unwindToMain(segue: UIStoryboardSegue) {}
-    
-    @IBAction private func textFieldDidChange(_ textField: UITextField) {
-        presenter.setQuery(textField.text)
-    }
 }

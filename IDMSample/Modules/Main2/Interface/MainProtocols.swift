@@ -33,6 +33,8 @@ public protocol MainOutputProtocol {
 
 protocol MainViewActionDelegate: class {
     func viewReady()
+    
+    func searchQueryDidChange(_ query: String)
 }
 
 protocol MainViewProtocol: ViewStateSubscriber {

@@ -20,4 +20,8 @@ extension MainViewActionDelegate where Self: MainControllerProtocol {
     func viewReady() {
         // <#code here#>
     }
+    
+    func searchQueryDidChange(_ query: String) {
+        presenter.setQuery(query)
+    }
 }

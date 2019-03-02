@@ -24,7 +24,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="search"/>
                                 <connections>
-                                    <action selector="textFieldDidChange:" destination="vKn-9P-Ny8" eventType="editingChanged" id="5oY-lr-itj"/>
+                                    <action selector="searchFieldDidChange:" destination="BNZ-bO-rhc" eventType="editingChanged" id="lSD-M3-Iw7"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWE-iC-kdc">

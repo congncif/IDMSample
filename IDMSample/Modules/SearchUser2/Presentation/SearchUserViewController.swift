@@ -27,17 +27,3 @@ public class SearchUserViewController: UIViewController, SearchUserControllerBri
         presenter.start(with: query)
     }
 }
-
-// Routing & Actions
-extension SearchUserViewController {
-    @IBAction private func refreshButtonDidTap() {
-        performSearch()
-    }
-}
-
-extension SearchUserViewController: UITableViewDelegate {
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let model = state.users[indexPath.row]
-        output?.userDidSelect(model)
-    }
-}
