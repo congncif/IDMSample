@@ -29,7 +29,6 @@
 		0A75F0AD222ADBA40062D85A /* MainProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A75F0A3222ADBA40062D85A /* MainProtocols.swift */; };
 		0A75F0AE222ADBA40062D85A /* MainExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A75F0A4222ADBA40062D85A /* MainExtensions.swift */; };
 		0A75F0AF222ADBA40062D85A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A75F0A5222ADBA40062D85A /* MainView.swift */; };
-		0A75F0B1222ADBA40062D85A /* MainViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A75F0A7222ADBA40062D85A /* MainViewState.swift */; };
 		0A75F0C0222AE0B10062D85A /* SearchUserDependencyBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A75F0B6222AE0B10062D85A /* SearchUserDependencyBridge.swift */; };
 		0A75F0C2222AE0B10062D85A /* SearchUserPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A75F0B8222AE0B10062D85A /* SearchUserPresenter.swift */; };
 		0A75F0C3222AE0B10062D85A /* SearchUserViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A75F0B9222AE0B10062D85A /* SearchUserViewController.storyboard */; };
@@ -37,7 +36,6 @@
 		0A75F0C5222AE0B10062D85A /* SearchUserProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A75F0BB222AE0B10062D85A /* SearchUserProtocols.swift */; };
 		0A75F0C6222AE0B10062D85A /* SearchUserExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A75F0BC222AE0B10062D85A /* SearchUserExtensions.swift */; };
 		0A75F0C7222AE0B10062D85A /* SearchUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A75F0BD222AE0B10062D85A /* SearchUserView.swift */; };
-		0A75F0C9222AE0B10062D85A /* SearchUserViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A75F0BF222AE0B10062D85A /* SearchUserViewState.swift */; };
 		0AD031642219A50600C633D8 /* Imgur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD031632219A50600C633D8 /* Imgur.swift */; };
 		0AD031672219A81700C633D8 /* String+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD031662219A81700C633D8 /* String+Auth.swift */; };
 		0AD031712219A91700C633D8 /* ImgurImageUploadMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD0316C2219A91700C633D8 /* ImgurImageUploadMapper.swift */; };
@@ -74,7 +72,6 @@
 		0A75F0A3222ADBA40062D85A /* MainProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProtocols.swift; sourceTree = "<group>"; };
 		0A75F0A4222ADBA40062D85A /* MainExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainExtensions.swift; sourceTree = "<group>"; };
 		0A75F0A5222ADBA40062D85A /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		0A75F0A7222ADBA40062D85A /* MainViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewState.swift; sourceTree = "<group>"; };
 		0A75F0B6222AE0B10062D85A /* SearchUserDependencyBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserDependencyBridge.swift; sourceTree = "<group>"; };
 		0A75F0B8222AE0B10062D85A /* SearchUserPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserPresenter.swift; sourceTree = "<group>"; };
 		0A75F0B9222AE0B10062D85A /* SearchUserViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchUserViewController.storyboard; sourceTree = "<group>"; };
@@ -82,7 +79,6 @@
 		0A75F0BB222AE0B10062D85A /* SearchUserProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserProtocols.swift; sourceTree = "<group>"; };
 		0A75F0BC222AE0B10062D85A /* SearchUserExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserExtensions.swift; sourceTree = "<group>"; };
 		0A75F0BD222AE0B10062D85A /* SearchUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserView.swift; sourceTree = "<group>"; };
-		0A75F0BF222AE0B10062D85A /* SearchUserViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserViewState.swift; sourceTree = "<group>"; };
 		0AD031632219A50600C633D8 /* Imgur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Imgur.swift; sourceTree = "<group>"; };
 		0AD031662219A81700C633D8 /* String+Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Auth.swift"; sourceTree = "<group>"; };
 		0AD0316C2219A91700C633D8 /* ImgurImageUploadMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgurImageUploadMapper.swift; sourceTree = "<group>"; };
@@ -156,7 +152,6 @@
 				0A75F09E222ADBA40062D85A /* MainDependencyBridge.swift */,
 				0A75F0A3222ADBA40062D85A /* MainProtocols.swift */,
 				0A75F0A4222ADBA40062D85A /* MainExtensions.swift */,
-				0A75F0A7222ADBA40062D85A /* MainViewState.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -194,7 +189,6 @@
 				0A75F0B6222AE0B10062D85A /* SearchUserDependencyBridge.swift */,
 				0A75F0BB222AE0B10062D85A /* SearchUserProtocols.swift */,
 				0A75F0BC222AE0B10062D85A /* SearchUserExtensions.swift */,
-				0A75F0BF222AE0B10062D85A /* SearchUserViewState.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -538,7 +532,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A1585E022107CF0002B123B /* MainBridge.swift in Sources */,
-				0A75F0B1222ADBA40062D85A /* MainViewState.swift in Sources */,
 				0A15859F22107AD6002B123B /* GitHub.swift in Sources */,
 				0A75F0C5222AE0B10062D85A /* SearchUserProtocols.swift in Sources */,
 				0A158598221079F9002B123B /* SearchUserDataProvider.swift in Sources */,
@@ -555,7 +548,6 @@
 				0A15859D22107AD6002B123B /* UIViewController++.swift in Sources */,
 				0A158596221079F9002B123B /* SearchUserMapper.swift in Sources */,
 				0A75F0AA222ADBA40062D85A /* MainPresenter.swift in Sources */,
-				0A75F0C9222AE0B10062D85A /* SearchUserViewState.swift in Sources */,
 				0A75F0C2222AE0B10062D85A /* SearchUserPresenter.swift in Sources */,
 				0A158595221079F9002B123B /* SearchUserDefinitions.swift in Sources */,
 				0A75F0A8222ADBA40062D85A /* MainDependencyBridge.swift in Sources */,

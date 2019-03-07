@@ -51,13 +51,15 @@ protocol SearchUserControllerProtocol {
 }
 
 protocol SearchUserPresenterProtocol {
-    var state: SearchUserViewState { get }
-
     var dataLoadingMonitor: LoadingMonitorProtocol? { get set }
     var dataProcessor: DataProcessor<SearchUserResponseModel> { get }
     
+    func register(view: SearchUserViewProtocol)
+    
     func start(with query: String)
+    func currentQuery() -> String
     func setUsers(_ users: [SearchUserModel])
+    func user(at index: Int) -> SearchUserModel
 }
 
 protocol SearchUserRouterProtocol {}

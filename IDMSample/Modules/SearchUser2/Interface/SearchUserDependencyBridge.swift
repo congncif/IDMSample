@@ -15,8 +15,8 @@ class SearchUserDependencyBridge: NSObject {
 
     @IBOutlet weak var viewBridge: AnyObject? {
         didSet {
-            if let subscriber = viewBridge as? ViewStateSubscriber {
-                presenter.state.register(subscriber: subscriber)
+            if let view = viewBridge as? SearchUserViewProtocol {
+                presenter.register(view: view)
             }
         }
     }

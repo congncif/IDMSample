@@ -30,7 +30,7 @@ extension MainViewController: MainInputProtocol {
 extension MainViewController {
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let segue = segue as? MainRouterProtocol {
-            segue.openSearchModule(with: state.queryState.query.unwrapped())
+            segue.openSearchModule(with: presenter.currentQuery())
         }
     }
 

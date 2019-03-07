@@ -12,10 +12,6 @@ import IDMFoundation
 
 /*Always put every application logic in extensions of protocols*/
 
-extension MainControllerProtocol {
-    var state: MainViewState { return presenter.state }
-}
-
 extension MainViewActionDelegate where Self: MainControllerProtocol {
     func viewReady() {
         // <#code here#>

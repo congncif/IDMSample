@@ -13,10 +13,8 @@ import IDMFoundation
 /*Always put every application logic in extensions of protocols*/
 
 extension SearchUserControllerProtocol {
-    var state: SearchUserViewState { return presenter.state }
-    
     func performSearch() {
-        let param = SearchUserParameter(q: state.query.unwrapped())
+        let param = SearchUserParameter(q: presenter.currentQuery())
         integrator.prepareCall(parameters: param)
             .setLoadingMonitor(presenter.dataLoadingMonitor)
             .dataProcessor(presenter.dataProcessor)
@@ -36,7 +34,7 @@ extension SearchUserViewActionDelegate where Self: SearchUserControllerProtocol 
 
 extension SearchUserViewActionDelegate where Self: SearchUserControllerProtocol, Self: SearchUserModuleInterface {
     func listItemDidSelect(at index: Int) {
-        let model = state.users[index]
+        let model = presenter.user(at: index)
         output?.userDidSelect(model)
     }
 }

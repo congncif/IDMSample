@@ -48,8 +48,8 @@ protocol MainControllerProtocol {
 }
 
 protocol MainPresenterProtocol {
-    var state: MainViewState { get }
-    
+    func register(view: MainViewProtocol)
+    func currentQuery() -> String
     func selectUser(_ user: SearchUserModel)
     func setQuery(_ query: String?)
 }
