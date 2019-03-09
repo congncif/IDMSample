@@ -12,14 +12,6 @@ import ViewStateCore
 class SearchUserDependencyBridge: NSObject {
     var presenter: SearchUserPresenterProtocol!
     var integrator: SearchUserAbstractIntegrator!
-
-    @IBOutlet weak var viewBridge: AnyObject? {
-        didSet {
-            if let view = viewBridge as? SearchUserViewProtocol {
-                presenter.register(view: view)
-            }
-        }
-    }
 }
 
 protocol SearchUserControllerBridgeProtocol: SearchUserControllerProtocol {

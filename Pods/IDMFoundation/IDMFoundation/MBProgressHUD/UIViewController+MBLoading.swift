@@ -12,7 +12,7 @@ import MBProgressHUD
 import SiFUtilities
 import UIKit
 
-extension LoadingProtocol where Self: UIView {
+extension LoadingObjectProtocol where Self: UIView {
     public func beginLoading() {
         let hud = MBProgressHUD.showAdded(to: self, animated: true)
         hud.label.text = "Loading...".localized
@@ -23,7 +23,7 @@ extension LoadingProtocol where Self: UIView {
     }
 }
 
-extension UIViewController: ErrorHandlingProtocol {
+extension UIViewController: ErrorHandlingObjectProtocol {
     @objc open func handle(error: Error?) {
         guard let error = error else {
             return
@@ -38,7 +38,7 @@ extension UIViewController: ErrorHandlingProtocol {
     }
 }
 
-extension ProgressLoadingProtocol where Self: UIView {
+extension ProgressLoadingObjectProtocol where Self: UIView {
     public func beginProgressLoading() {
         let hud = MBProgressHUD.showAdded(to: self, animated: true)
         hud.label.text = "Loading...".localized
@@ -60,9 +60,9 @@ extension ProgressLoadingProtocol where Self: UIView {
     }
 }
 
-extension UIView: LoadingProtocol, ProgressLoadingProtocol {}
+extension UIView: LoadingObjectProtocol, ProgressLoadingObjectProtocol {}
 
-extension UIViewController: LoadingProtocol {
+extension UIViewController: LoadingObjectProtocol {
     @objc open func beginLoading() {
         view.beginLoading()
     }
@@ -72,7 +72,7 @@ extension UIViewController: LoadingProtocol {
     }
 }
 
-extension UIViewController: ProgressLoadingProtocol {
+extension UIViewController: ProgressLoadingObjectProtocol {
     @objc open func beginProgressLoading() {
         view.beginProgressLoading()
     }

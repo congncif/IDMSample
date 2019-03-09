@@ -1,36 +1,36 @@
 PODS:
   - Alamofire (4.8.1)
-  - IDMCore (2.8.13)
-  - IDMFoundation (2.1.5):
-    - IDMFoundation/Default (= 2.1.5)
-  - IDMFoundation/Alamofire (2.1.5):
+  - IDMCore (2.8.18)
+  - IDMFoundation (2.1.7):
+    - IDMFoundation/Default (= 2.1.7)
+  - IDMFoundation/Alamofire (2.1.7):
     - Alamofire
     - IDMCore
     - IDMFoundation/Networking
     - SiFUtilities
-  - IDMFoundation/CameraAsset (2.1.5):
+  - IDMFoundation/CameraAsset (2.1.7):
     - IDMFoundation/Networking
     - SiFUtilities
-  - IDMFoundation/Core (2.1.5):
+  - IDMFoundation/Core (2.1.7):
     - IDMCore
     - SiFUtilities
-  - IDMFoundation/Default (2.1.5):
+  - IDMFoundation/Default (2.1.7):
     - IDMFoundation/Alamofire
     - IDMFoundation/CameraAsset
     - IDMFoundation/Core
     - IDMFoundation/MBProgressHUD
     - IDMFoundation/Networking
     - IDMFoundation/ObjectMapper
-  - IDMFoundation/MBProgressHUD (2.1.5):
+  - IDMFoundation/MBProgressHUD (2.1.7):
     - IDMCore
     - MBProgressHUD
     - SiFUtilities
-  - IDMFoundation/Networking (2.1.5):
+  - IDMFoundation/Networking (2.1.7):
     - IDMCore
     - IDMFoundation/Core
     - SiFUtilities
     - "UIImage+FixOrientation"
-  - IDMFoundation/ObjectMapper (2.1.5):
+  - IDMFoundation/ObjectMapper (2.1.7):
     - IDMCore
     - IDMFoundation/Core
     - ObjectMapper
@@ -98,8 +98,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
-  IDMCore: 8bb263386f273a1e761332cec20c92fa8a9d5739
-  IDMFoundation: 34e17f2bef29ee60b7d546837b6b56a085bf718f
+  IDMCore: 7823d5c21539d3125f99526e41140d180eeb40bf
+  IDMFoundation: 7b9916dac84764e815c8c51979890991b5d5817d
   Localize-Swift: c798ec9286494866f7068f85f7c71283ac5bdab4
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   ModuleX: c6965f347d31836ddf40b0d803c8ef6571313b1c

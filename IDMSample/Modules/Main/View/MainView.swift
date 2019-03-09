@@ -16,6 +16,10 @@ class MainView: UIView, MainViewProtocol {
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var selectedUserLabel: UILabel!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
     var actionDelegate: MainViewActionDelegate? {
         return actionDelegateBridge as? MainViewActionDelegate
     }

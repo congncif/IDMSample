@@ -75,7 +75,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k0X-am-vwV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="axh-Bd-Vxu" customClass="MainBridge" customModule="IDMSample" customModuleProvider="target">
                     <connections>
-                        <outlet property="viewBridge" destination="BNZ-bO-rhc" id="70d-RM-Qwd"/>
+                        <outlet property="viewBridge" destination="BNZ-bO-rhc" id="LV6-cP-aMJ"/>
                     </connections>
                 </customObject>
             </objects>

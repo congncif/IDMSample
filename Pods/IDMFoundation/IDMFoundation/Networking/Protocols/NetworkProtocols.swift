@@ -80,9 +80,9 @@ extension RouteRequestBuildable {
         return route.headers
     }
 
-    public func url(_ parameters: RequestParameterType?) throws -> URL {
-        return try route.endpoint.path().toURL()
-    }
+//    public func url(_ parameters: RequestParameterType?) throws -> URL {
+//        return try route.endpoint.path().toURL()
+//    }
 }
 
 // MARK: - #5 Request Adaptable

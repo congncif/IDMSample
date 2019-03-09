@@ -104,8 +104,9 @@
                 <exit id="enP-eW-1Qt" userLabel="Exit" sceneMemberID="exit"/>
                 <customObject id="axh-Bd-Vxu" customClass="SearchUserBridge" customModule="IDMSample" customModuleProvider="target">
                     <connections>
-                        <outlet property="dataLoadingMonitorBridge" destination="vKn-9P-Ny8" id="vud-bH-qhn"/>
-                        <outlet property="viewBridge" destination="BNZ-bO-rhc" id="70d-RM-Qwd"/>
+                        <outlet property="errorHandler" destination="vKn-9P-Ny8" id="DBO-EF-woh"/>
+                        <outlet property="loadingHandler" destination="BNZ-bO-rhc" id="Vf9-Qa-Oer"/>
+                        <outlet property="viewBridge" destination="BNZ-bO-rhc" id="bLV-ro-pIe"/>
                     </connections>
                 </customObject>
                 <customObject id="FMv-Ma-wUf" customClass="SearchUserArrayController" customModule="IDMSample" customModuleProvider="target">

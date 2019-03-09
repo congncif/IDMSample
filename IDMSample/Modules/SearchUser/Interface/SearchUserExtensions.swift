@@ -16,7 +16,8 @@ extension SearchUserControllerProtocol {
     func performSearch() {
         let param = SearchUserParameter(q: presenter.currentQuery())
         integrator.prepareCall(parameters: param)
-            .setLoadingMonitor(presenter.dataLoadingMonitor)
+            .loadingHandler(presenter.loadingHandler)
+            .errorHandler(presenter.errorHandler)
             .dataProcessor(presenter.dataProcessor)
             .call()
     }

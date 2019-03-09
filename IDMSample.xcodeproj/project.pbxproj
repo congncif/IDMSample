@@ -124,7 +124,7 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		0A75F09C222ADB7D0062D85A /* Main2 */ = {
+		0A75F09C222ADB7D0062D85A /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				0A75F0B3222ADBD90062D85A /* InOut */,
@@ -132,10 +132,10 @@
 				0A75F0B4222ADBE60062D85A /* Presentation */,
 				0A75F0B5222ADBF40062D85A /* View */,
 			);
-			path = Main2;
+			path = Main;
 			sourceTree = "<group>";
 		};
-		0A75F09D222ADB880062D85A /* SearchUser2 */ = {
+		0A75F09D222ADB880062D85A /* SearchUser */ = {
 			isa = PBXGroup;
 			children = (
 				0A75F0CA222AE0BB0062D85A /* Interface */,
@@ -143,7 +143,7 @@
 				0A75F0CC222AE0D40062D85A /* Presentation */,
 				0A75F0CD222AE0DD0062D85A /* View */,
 			);
-			path = SearchUser2;
+			path = SearchUser;
 			sourceTree = "<group>";
 		};
 		0A75F0B2222ADBB70062D85A /* Interface */ = {
@@ -348,8 +348,8 @@
 		20855DEF21A3B9040073159F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				0A75F09C222ADB7D0062D85A /* Main2 */,
-				0A75F09D222ADB880062D85A /* SearchUser2 */,
+				0A75F09C222ADB7D0062D85A /* Main */,
+				0A75F09D222ADB880062D85A /* SearchUser */,
 			);
 			path = Modules;
 			sourceTree = "<group>";

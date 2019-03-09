@@ -11,14 +11,6 @@ import ViewStateCore
 
 class MainDependencyBridge: NSObject {
     var presenter: MainPresenterProtocol!
-
-    @IBOutlet weak var viewBridge: AnyObject? {
-        didSet {
-            if let view = viewBridge as? MainViewProtocol {
-                presenter.register(view: view)
-            }
-        }
-    }
 }
 
 protocol MainControllerBridgeProtocol: MainControllerProtocol {

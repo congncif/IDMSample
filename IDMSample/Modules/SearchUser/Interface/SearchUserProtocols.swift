@@ -51,7 +51,8 @@ protocol SearchUserControllerProtocol {
 }
 
 protocol SearchUserPresenterProtocol {
-    var dataLoadingMonitor: LoadingMonitorProtocol? { get set }
+    var errorHandler: ErrorHandlingProtocol { get }
+    var loadingHandler: LoadingProtocol! { get set }
     var dataProcessor: DataProcessor<SearchUserResponseModel> { get }
     
     func register(view: SearchUserViewProtocol)

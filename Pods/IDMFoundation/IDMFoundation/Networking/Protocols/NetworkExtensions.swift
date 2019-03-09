@@ -15,9 +15,9 @@ extension URLBuildable {
     }
 }
 
-extension RouteRequestBuildable where RequestParameterType: URLBuildable {
+extension RouteRequestBuildable {
     public func url(_ parameters: RequestParameterType?) throws -> URL {
-        if let param = parameters {
+        if let param = parameters as? URLBuildable {
             return try param.build(from: route.endpoint)
         }
         return try route.endpoint.path().toURL()

@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "07978C1B762B3E940AE93287D7B168E0"
+               BlueprintIdentifier = "5B1D042DB5D5F5D2B03B3B4B707C11D1"
                BuildableName = "SiFUtilities.framework"
                BlueprintName = "SiFUtilities"
                ReferencedContainer = "container:Pods.xcodeproj">
