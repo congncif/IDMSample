@@ -2,26 +2,17 @@
 //  SearchUserView.swift
 //  IDMSample
 //
-//  Created by NGUYEN CHI CONG on 3/2/19.
+//  Created by NGUYEN CHI CONG on 3/31/19.
 //  Copyright © 2019 [iF] Solution. All rights reserved.
 //
 
 import UIKit
 import ViewStateCore
 
-class SearchUserView: UIView, SearchUserViewProtocol {
-	@IBOutlet weak var actionDelegateBridge: AnyObject?
+final class SearchUserView: UIView, SearchUserViewProtocol {
+    weak var actionDelegate: SearchUserViewActionDelegate?
     
     @IBOutlet var dataSource: SearchUserArrayController?
-    @IBOutlet weak var tableView: UITableView!
-
-    var actionDelegate: SearchUserViewActionDelegate? {
-        return actionDelegateBridge as? SearchUserViewActionDelegate
-    }
-    
-    @IBAction func refreshButtonDidTap() {
-        actionDelegate?.refresh()
-    }
 }
 
 extension SearchUserView: UITableViewDelegate {

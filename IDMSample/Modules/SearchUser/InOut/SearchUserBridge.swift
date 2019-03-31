@@ -1,43 +1,46 @@
 //
 //  SearchUserBridge.swift
-//  IDMFoundation
+//  IDMSample
 //
-//  Created by NGUYEN CHI CONG on 2/10/19.
-//  Copyright © 2019 CocoaPods. All rights reserved.
+//  Created by NGUYEN CHI CONG on 3/31/19.
+//  Copyright © 2019 [iF] Solution. All rights reserved.
 //
 
 import Foundation
 import IDMCore
 import IDMFoundation
 
-class SearchUserBridge: SearchUserDependencyBridge {
-    @IBOutlet weak var loadingHandler: AnyObject? {
-        didSet {
-            if let handler = loadingHandler as? LoadingObjectProtocol {
-                presenter.loadingHandler = handler.asValueType()
-            }
-        }
-    }
-    
-    @IBOutlet weak var viewBridge: AnyObject? {
-        didSet {
-            if let view = viewBridge as? SearchUserViewProtocol {
-                presenter.register(view: view)
-            }
-        }
-    }
-    
-    @IBOutlet weak var errorHandler: AnyObject? {
-        didSet {
-            if let handler = errorHandler as? ErrorHandlingObjectProtocol, let _presenter = presenter as? SearchUserPresenter {
-                _presenter.register(errorHandler: handler.asValueType())
-            }
-        }
-    }
+final class SearchUserBridge: NSObject, SearchUserDependencyBridge {
+    private var _presenter = SearchUserPresenter()
+
+    @IBOutlet private weak var viewController: SearchUserViewController!
+    @IBOutlet private weak var contentView: SearchUserView!
+    @IBOutlet private var navigationView: SearchUserNavigationView!
+
+    var presenter: SearchUserPresenterProtocol! { return _presenter }
+    var integrator: SearchUserAbstractIntegrator!
 
     override init() {
         super.init()
-        presenter = SearchUserPresenter()
-        integrator = SearchUserIntegratorFactory.getIntegrator()
+        
+        integrator = SearchUserIntegratorFactory.produce()
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        viewController.loadViewIfNeeded()
+
+        viewController.dependencyBridge = self
+
+        _presenter.actionDelegate = viewController
+        _presenter.add(errorHandler: viewController.asErrorHandler())
+        _presenter.dataLoadingHandler = contentView.asLoadingHandler()
+        
+        _presenter.state.register(subscriberObject: contentView)
+        _presenter.state.register(subscriberObject: navigationView)
+
+        navigationView.actionDelegate = viewController
+        contentView.actionDelegate = viewController
     }
 }

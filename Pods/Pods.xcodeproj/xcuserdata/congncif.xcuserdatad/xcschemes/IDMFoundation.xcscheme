@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "99AF99C5F534524B317B2309987F2BBD"
+               BlueprintIdentifier = "D8517137E5461CE83A50936CF06FBA14"
                BuildableName = "IDMFoundation.framework"
                BlueprintName = "IDMFoundation"
                ReferencedContainer = "container:Pods.xcodeproj">

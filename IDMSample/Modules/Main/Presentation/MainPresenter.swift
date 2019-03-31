@@ -2,51 +2,55 @@
 //  MainPresenter.swift
 //  IDMSample
 //
-//  Created by NGUYEN CHI CONG on 3/2/19.
+//  Created by NGUYEN CHI CONG on 3/30/19.
 //  Copyright © 2019 [iF] Solution. All rights reserved.
 //
 
 import Foundation
+import IDMCore
 import IDMFoundation
 import ViewStateCore
 
 // Properties of ViewState should be protected from outside.
 
-class MainViewState: ViewState {
+@objcMembers
+final class MainViewState: ViewState {
+    @objcMembers
     class QueryState: ViewState {
-        @objc fileprivate(set) dynamic var query: String?
+        fileprivate(set) dynamic var query: String?
     }
-
+    @objcMembers
     class SelectionState: ViewState {
-        @objc fileprivate(set) dynamic var selectedUser: SearchUserModel?
+        fileprivate(set) dynamic var selectedUser: SearchUserModel?
     }
-
-    @objc fileprivate(set) dynamic var queryState = QueryState()
-    @objc fileprivate(set) dynamic var selectionState = SelectionState()
+    
+    fileprivate(set) dynamic var queryState = QueryState()
+    fileprivate(set) dynamic var selectionState = SelectionState()
 }
 
-class MainPresenter: MainPresenterProtocol {
-    fileprivate let state: MainViewState
+final class MainPresenter: MainPresenterProtocol, StatefulPresenterProtocol, MultipleErrorHandlingProtocol {
+    let state: MainViewState
+    var errorHandlingProxy: ErrorHandlingProxy
 
     init(state: MainViewState = MainViewState()) {
         self.state = state
+        errorHandlingProxy = ErrorHandlingProxy()
     }
 
-    func register(view: MainViewProtocol) {
-        state.register(subscriber: view)
-    }
-
-    func currentQuery() -> String {
-        return state.queryState.query.unwrapped()
-    }
+    var actionDelegate: MainViewActionDelegate?
+    var dataLoadingHandler: LoadingProtocol!
 }
 
 extension MainPresenter {
     func selectUser(_ user: SearchUserModel) {
         state.selectionState.selectedUser = user
     }
-
+    
     func setQuery(_ query: String?) {
         state.queryState.query = query
+    }
+    
+    func currentQuery() -> String {
+        return state.queryState.query.unwrapped()
     }
 }

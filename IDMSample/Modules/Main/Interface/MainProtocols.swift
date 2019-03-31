@@ -2,7 +2,7 @@
 //  MainProtocols.swift
 //  IDMSample
 //
-//  Created by NGUYEN CHI CONG on 3/2/19.
+//  Created by NGUYEN CHI CONG on 3/30/19.
 //  Copyright © 2019 [iF] Solution. All rights reserved.
 //
 
@@ -15,23 +15,23 @@ import ViewStateCore
 /// Come from outside
 
 public protocol MainModuleInterface: ModuleInterface, MainInputProtocol {
-	var output: MainOutputProtocol? { get set }
+    var output: MainOutputProtocol? { get set }
 }
 
 /// In/Out
 
 public protocol MainInputProtocol {
-	// Declare method to come in from outside module
+    // Declare method to come in from outside module
     func selectUser(_ user: SearchUserModel)
 }
 
 public protocol MainOutputProtocol {
-	// Declare method to go out module
+    // Declare method to go out module
 }
 
 /// Internal
 
-protocol MainViewActionDelegate: class {
+protocol MainViewActionDelegate: AnyObject {
     func viewReady()
     
     func searchQueryDidChange(_ query: String)
@@ -48,7 +48,11 @@ protocol MainControllerProtocol {
 }
 
 protocol MainPresenterProtocol {
-    func register(view: MainViewProtocol)
+    var actionDelegate: MainViewActionDelegate? { get }
+    var errorHandler: ErrorHandlingProtocol { get }
+
+    var dataLoadingHandler: LoadingProtocol! { get }
+    
     func currentQuery() -> String
     func selectUser(_ user: SearchUserModel)
     func setQuery(_ query: String?)

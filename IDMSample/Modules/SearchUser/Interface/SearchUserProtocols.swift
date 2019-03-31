@@ -2,7 +2,7 @@
 //  SearchUserProtocols.swift
 //  IDMSample
 //
-//  Created by NGUYEN CHI CONG on 3/2/19.
+//  Created by NGUYEN CHI CONG on 3/31/19.
 //  Copyright © 2019 [iF] Solution. All rights reserved.
 //
 
@@ -15,24 +15,24 @@ import ViewStateCore
 /// Come from outside
 
 public protocol SearchUserModuleInterface: ModuleInterface, SearchUserInputProtocol {
-	var output: SearchUserOutputProtocol? { get set }
+    var output: SearchUserOutputProtocol? { get set }
 }
 
 /// In/Out
 
 public protocol SearchUserInputProtocol {
-	// Declare method to come in from outside module
+    // Declare method to come in from outside module
     func start(with query: String)
 }
 
 public protocol SearchUserOutputProtocol {
-	// Declare method to go out module
+    // Declare method to go out module
     func userDidSelect(_ user: SearchUserModel)
 }
 
 /// Internal
 
-protocol SearchUserViewActionDelegate: class {
+protocol SearchUserViewActionDelegate: AnyObject {
     func viewReady()
     
     func listItemDidSelect(at index: Int)
@@ -51,11 +51,11 @@ protocol SearchUserControllerProtocol {
 }
 
 protocol SearchUserPresenterProtocol {
+    var actionDelegate: SearchUserViewActionDelegate? { get }
     var errorHandler: ErrorHandlingProtocol { get }
-    var loadingHandler: LoadingProtocol! { get set }
-    var dataProcessor: DataProcessor<SearchUserResponseModel> { get }
-    
-    func register(view: SearchUserViewProtocol)
+
+    var dataLoadingHandler: LoadingProtocol! { get }
+    var dataResponseHandler: DataProcessor<SearchUserResponseModel> { get }
     
     func start(with query: String)
     func currentQuery() -> String

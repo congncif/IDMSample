@@ -26,4 +26,8 @@ extension UploadFilesParameter {
         self.init(assets: assets, name: name)
         self.query = query
     }
+    
+    @objc open func transformImageToData(_ image: UIImage) -> Data? {
+        return image.pngData()
+    }
 }

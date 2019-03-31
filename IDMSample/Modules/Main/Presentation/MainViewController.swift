@@ -2,7 +2,7 @@
 //  MainViewController.swift
 //  IDMSample
 //
-//  Created by NGUYEN CHI CONG on 3/2/19.
+//  Created by NGUYEN CHI CONG on 3/30/19.
 //  Copyright © 2019 [iF] Solution. All rights reserved.
 //
 
@@ -10,10 +10,10 @@ import Foundation
 import UIKit
 import ViewStateCore
 
-public class MainViewController: UIViewController, MainControllerBridgeProtocol, MainViewActionDelegate, MainModuleInterface {
+public final class MainViewController: UIViewController, MainControllerBridgeProtocol, MainViewActionDelegate, MainModuleInterface {
     public var output: MainOutputProtocol?
 
-    @IBOutlet var bridge: MainDependencyBridge!
+    var dependencyBridge: MainDependencyBridge!
 
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +33,6 @@ extension MainViewController {
             segue.openSearchModule(with: presenter.currentQuery())
         }
     }
-
+    
     @IBAction private func unwindToMain(segue: UIStoryboardSegue) {}
 }

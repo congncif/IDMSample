@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vKn-9P-Ny8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vKn-9P-Ny8">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Action Delegate Bridge-->
+        <!--Module Controller-->
         <scene sceneID="GzV-lN-fg7">
             <objects>
-                <viewController storyboardIdentifier="SearchUserViewController" id="vKn-9P-Ny8" customClass="SearchUserViewController" customModule="IDMSample" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="BNZ-bO-rhc" customClass="SearchUserView" customModule="IDMSample" customModuleProvider="target">
+                <viewController storyboardIdentifier="SearchUserViewController" id="vKn-9P-Ny8" userLabel="Module Controller" customClass="SearchUserViewController" customModule="IDMSample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Sgd-fO-sDe" customClass="SearchUserView" customModule="IDMSample" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="86" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="keF-Qg-Vcc">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="86" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wow-Uk-Le8">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SearchUserTableViewCell" rowHeight="86" id="R9X-m8-pi8" customClass="SearchUserTableViewCell" customModule="IDMSample" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SearchUserTableViewCell" rowHeight="86" id="hZo-Tn-EVx" customClass="SearchUserTableViewCell" customModule="IDMSample" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="86"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="R9X-m8-pi8" id="IbD-bY-qkn">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hZo-Tn-EVx" id="bes-oH-CF9">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="85.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nLt-gZ-rLx">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VSC-8z-tUq">
                                                     <rect key="frame" x="13" y="8" width="69.5" height="69.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="nLt-gZ-rLx" secondAttribute="height" id="xHz-Fc-S95"/>
+                                                        <constraint firstAttribute="width" secondItem="VSC-8z-tUq" secondAttribute="height" id="JhN-um-kJ0"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ftb-08-a02">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M4z-Ay-9Ni">
                                                     <rect key="frame" x="90.5" y="13" width="274.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OE5-xA-QIz">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zh5-Yp-pm7">
                                                     <rect key="frame" x="90.5" y="39" width="274.5" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -49,69 +49,71 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="OE5-xA-QIz" firstAttribute="leading" secondItem="Ftb-08-a02" secondAttribute="leading" id="42g-7H-4LR"/>
-                                                <constraint firstItem="nLt-gZ-rLx" firstAttribute="leading" secondItem="IbD-bY-qkn" secondAttribute="leading" constant="13" id="5l5-Kz-1yH"/>
-                                                <constraint firstItem="Ftb-08-a02" firstAttribute="top" secondItem="IbD-bY-qkn" secondAttribute="top" constant="13" id="7Ug-4W-Bgp"/>
-                                                <constraint firstAttribute="trailing" secondItem="Ftb-08-a02" secondAttribute="trailing" constant="10" id="8Sb-Vh-G0O"/>
-                                                <constraint firstItem="OE5-xA-QIz" firstAttribute="top" secondItem="Ftb-08-a02" secondAttribute="bottom" constant="5" id="EU7-nb-igI"/>
-                                                <constraint firstAttribute="bottom" secondItem="nLt-gZ-rLx" secondAttribute="bottom" constant="8" id="c5L-FM-axG"/>
-                                                <constraint firstItem="Ftb-08-a02" firstAttribute="leading" secondItem="nLt-gZ-rLx" secondAttribute="trailing" constant="8" id="cHB-4G-Zn3"/>
-                                                <constraint firstItem="nLt-gZ-rLx" firstAttribute="top" secondItem="IbD-bY-qkn" secondAttribute="top" constant="8" id="kOr-Hv-8aA"/>
-                                                <constraint firstItem="OE5-xA-QIz" firstAttribute="trailing" secondItem="Ftb-08-a02" secondAttribute="trailing" id="p4K-NE-BvB"/>
+                                                <constraint firstItem="M4z-Ay-9Ni" firstAttribute="top" secondItem="bes-oH-CF9" secondAttribute="top" constant="13" id="02U-C6-fff"/>
+                                                <constraint firstItem="Zh5-Yp-pm7" firstAttribute="trailing" secondItem="M4z-Ay-9Ni" secondAttribute="trailing" id="3Q7-Lz-YHo"/>
+                                                <constraint firstAttribute="trailing" secondItem="M4z-Ay-9Ni" secondAttribute="trailing" constant="10" id="4t0-cI-6kI"/>
+                                                <constraint firstItem="Zh5-Yp-pm7" firstAttribute="leading" secondItem="M4z-Ay-9Ni" secondAttribute="leading" id="9Ef-Dj-n7R"/>
+                                                <constraint firstAttribute="bottom" secondItem="VSC-8z-tUq" secondAttribute="bottom" constant="8" id="Ia8-te-0br"/>
+                                                <constraint firstItem="VSC-8z-tUq" firstAttribute="leading" secondItem="bes-oH-CF9" secondAttribute="leading" constant="13" id="c09-Ay-GzS"/>
+                                                <constraint firstItem="M4z-Ay-9Ni" firstAttribute="leading" secondItem="VSC-8z-tUq" secondAttribute="trailing" constant="8" id="cDV-Rm-CXB"/>
+                                                <constraint firstItem="VSC-8z-tUq" firstAttribute="top" secondItem="bes-oH-CF9" secondAttribute="top" constant="8" id="iMY-Pr-CPN"/>
+                                                <constraint firstItem="Zh5-Yp-pm7" firstAttribute="top" secondItem="M4z-Ay-9Ni" secondAttribute="bottom" constant="5" id="ocg-kY-Ai9"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="homePageLabel" destination="OE5-xA-QIz" id="jH9-Qc-pkR"/>
-                                            <outlet property="thumbImageView" destination="nLt-gZ-rLx" id="W6r-hM-G9R"/>
-                                            <outlet property="titleLabel" destination="Ftb-08-a02" id="lEP-Qy-B0i"/>
-                                            <segue destination="enP-eW-1Qt" kind="unwind" customClass="SearchUserSegue" customModule="IDMSample" customModuleProvider="target" unwindAction="unwindToMainWithSegue:" id="xQh-UG-zkw"/>
+                                            <outlet property="homePageLabel" destination="Zh5-Yp-pm7" id="WrC-OF-S4c"/>
+                                            <outlet property="thumbImageView" destination="VSC-8z-tUq" id="rIa-e6-Yo2"/>
+                                            <outlet property="titleLabel" destination="M4z-Ay-9Ni" id="8bc-uM-WoT"/>
+                                            <segue destination="WUP-2n-Iql" kind="unwind" unwindAction="unwindToMainWithSegue:" id="NIS-S9-atH"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="FMv-Ma-wUf" id="BEr-kX-YYN"/>
-                                    <outlet property="delegate" destination="BNZ-bO-rhc" id="DzV-TP-0Dd"/>
+                                    <outlet property="dataSource" destination="MWU-zi-NMQ" id="YdM-Ei-i83"/>
+                                    <outlet property="delegate" destination="Sgd-fO-sDe" id="Qu3-Jm-1xy"/>
                                 </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="HgA-Aw-ocO" firstAttribute="trailing" secondItem="keF-Qg-Vcc" secondAttribute="trailing" id="Hpe-Kx-tMD"/>
-                            <constraint firstItem="keF-Qg-Vcc" firstAttribute="leading" secondItem="BNZ-bO-rhc" secondAttribute="leading" id="I18-Oo-xaS"/>
-                            <constraint firstItem="keF-Qg-Vcc" firstAttribute="top" secondItem="HgA-Aw-ocO" secondAttribute="top" id="W2K-bt-zbX"/>
-                            <constraint firstAttribute="bottom" secondItem="keF-Qg-Vcc" secondAttribute="bottom" id="ueW-Ol-jLR"/>
+                            <constraint firstAttribute="bottom" secondItem="Wow-Uk-Le8" secondAttribute="bottom" id="NkU-Kk-G7T"/>
+                            <constraint firstItem="Wow-Uk-Le8" firstAttribute="top" secondItem="DQl-ao-cIo" secondAttribute="top" id="gdE-FH-Lm5"/>
+                            <constraint firstItem="Wow-Uk-Le8" firstAttribute="leading" secondItem="Sgd-fO-sDe" secondAttribute="leading" id="gef-9r-lLE"/>
+                            <constraint firstItem="DQl-ao-cIo" firstAttribute="trailing" secondItem="Wow-Uk-Le8" secondAttribute="trailing" id="t4L-da-qHs"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="HgA-Aw-ocO"/>
+                        <viewLayoutGuide key="safeArea" id="DQl-ao-cIo"/>
                         <connections>
-                            <outlet property="actionDelegateBridge" destination="vKn-9P-Ny8" id="K0o-50-RHA"/>
-                            <outlet property="dataSource" destination="FMv-Ma-wUf" id="Vei-L6-Y5T"/>
-                            <outlet property="tableView" destination="keF-Qg-Vcc" id="9Id-v2-74d"/>
+                            <outlet property="dataSource" destination="MWU-zi-NMQ" id="HhT-kl-gQn"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" title="Search" id="G1M-hY-gjv">
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="XF9-pA-D6Q">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Search" id="dDO-6r-mkg">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="3cp-VT-qyn">
                             <connections>
-                                <action selector="refreshButtonDidTap" destination="BNZ-bO-rhc" id="w7r-Qb-Nk0"/>
+                                <action selector="refreshButtonDidTap" destination="Z0z-d7-Bwq" id="CgN-zX-Buq"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <connections>
-                        <outlet property="bridge" destination="axh-Bd-Vxu" id="tMd-in-6Wj"/>
-                    </connections>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k0X-am-vwV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="enP-eW-1Qt" userLabel="Exit" sceneMemberID="exit"/>
-                <customObject id="axh-Bd-Vxu" customClass="SearchUserBridge" customModule="IDMSample" customModuleProvider="target">
+                <exit id="WUP-2n-Iql" userLabel="Exit" sceneMemberID="exit"/>
+                <customObject id="axh-Bd-Vxu" userLabel="Dependency Bridge" customClass="SearchUserBridge" customModule="IDMSample" customModuleProvider="target">
                     <connections>
-                        <outlet property="errorHandler" destination="vKn-9P-Ny8" id="DBO-EF-woh"/>
-                        <outlet property="loadingHandler" destination="BNZ-bO-rhc" id="Vf9-Qa-Oer"/>
-                        <outlet property="viewBridge" destination="BNZ-bO-rhc" id="bLV-ro-pIe"/>
+                        <outlet property="contentView" destination="Sgd-fO-sDe" id="nsn-gw-1Wu"/>
+                        <outlet property="navigationView" destination="Z0z-d7-Bwq" id="eY7-TO-uSD"/>
+                        <outlet property="viewController" destination="vKn-9P-Ny8" id="LiZ-pM-mtN"/>
                     </connections>
                 </customObject>
-                <customObject id="FMv-Ma-wUf" customClass="SearchUserArrayController" customModule="IDMSample" customModuleProvider="target">
+                <customObject id="MWU-zi-NMQ" customClass="SearchUserArrayController" customModule="IDMSample" customModuleProvider="target">
                     <connections>
-                        <outlet property="tableView" destination="keF-Qg-Vcc" id="ljR-Ra-h5g"/>
+                        <outlet property="tableView" destination="Wow-Uk-Le8" id="hvS-QV-Spp"/>
+                    </connections>
+                </customObject>
+                <customObject id="Z0z-d7-Bwq" customClass="SearchUserNavigationView" customModule="IDMSample" customModuleProvider="target">
+                    <connections>
+                        <outlet property="navigationItem" destination="dDO-6r-mkg" id="H7r-1W-kTw"/>
                     </connections>
                 </customObject>
             </objects>

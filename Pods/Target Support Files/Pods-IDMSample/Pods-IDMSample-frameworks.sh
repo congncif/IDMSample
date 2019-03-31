@@ -162,7 +162,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SiFUtilities/SiFUtilities.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/UIImage+FixOrientation/UIImage_FixOrientation.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ViewStateCore/ViewStateCore.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -175,7 +174,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SiFUtilities/SiFUtilities.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/UIImage+FixOrientation/UIImage_FixOrientation.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ViewStateCore/ViewStateCore.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

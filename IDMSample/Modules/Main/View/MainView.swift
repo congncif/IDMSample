@@ -2,27 +2,19 @@
 //  MainView.swift
 //  IDMSample
 //
-//  Created by NGUYEN CHI CONG on 3/2/19.
+//  Created by NGUYEN CHI CONG on 3/30/19.
 //  Copyright © 2019 [iF] Solution. All rights reserved.
 //
 
 import UIKit
 import ViewStateCore
 
-class MainView: UIView, MainViewProtocol {
-    @IBOutlet weak var actionDelegateBridge: AnyObject?
+final class MainView: UIView, MainViewProtocol {
+    weak var actionDelegate: MainViewActionDelegate?
     
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var selectedUserLabel: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
-    var actionDelegate: MainViewActionDelegate? {
-        return actionDelegateBridge as? MainViewActionDelegate
-    }
     
     @IBAction func searchFieldDidChange(_ textField: UITextField) {
         actionDelegate?.searchQueryDidChange(textField.text!)
@@ -64,3 +56,4 @@ extension MainView: ViewStateFillable {
         return []
     }
 }
+

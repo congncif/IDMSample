@@ -11,7 +11,7 @@ import Foundation
 import IDMFoundation
 
 public class SearchUserIntegratorFactory {
-    public static func getIntegrator() -> SearchUserAbstractIntegrator {
+    public static func produce() -> SearchUserAbstractIntegrator {
         return SearchUserIntegrator(dataProvider: SearchUserDataProvider(route: GitHubRoute.Search.user))
     }
 }

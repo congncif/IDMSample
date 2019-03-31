@@ -8,11 +8,35 @@
 
 import Foundation
 
-public struct Subscriber: Equatable {
-    public var id: String
-    public weak var target: ViewStateSubscriber?
+public typealias ViewStateSubscriberObject = ViewStateSubscriber & AnyObject
+
+private struct Subscriber: Equatable {
+    var id: String
+    var target: ViewStateSubscriber? {
+        if let _target = _retainTarget {
+            return _target
+        }
+        return _weakTarget
+    }
     
-    public static func == (lhs: Subscriber, rhs: Subscriber) -> Bool {
+    init(target: ViewStateSubscriberObject, retain: Bool) {
+        self.id = String(describing: target)
+        if retain {
+            _retainTarget = target
+        } else {
+            _weakTarget = target
+        }
+    }
+    
+    init(target: ViewStateSubscriber) {
+        self.id = String(describing: target)
+        _retainTarget = target
+    }
+    
+    private weak var _weakTarget: ViewStateSubscriberObject?
+    private var _retainTarget: ViewStateSubscriber?
+    
+    static func == (lhs: Subscriber, rhs: Subscriber) -> Bool {
         return lhs.id == rhs.id
     }
 }
@@ -24,8 +48,8 @@ open class ViewState: NSObject, ViewStateSubscriber {
         case _delegate
     }
     
-    public private(set) var subscribers: [Subscriber] = []
-    public weak var delegate: ViewStateSubscriber? {
+    private var subscribers: [Subscriber] = []
+    public weak var delegate: ViewStateSubscriberObject? {
         get {
             return _delegate
         }
@@ -42,7 +66,7 @@ open class ViewState: NSObject, ViewStateSubscriber {
         }
     }
     
-    fileprivate weak var _delegate: ViewStateSubscriber?
+    fileprivate weak var _delegate: ViewStateSubscriberObject?
     
     open var ignoreKeys: [String] {
         return []
@@ -73,9 +97,20 @@ open class ViewState: NSObject, ViewStateSubscriber {
         }
     }
     
+    public func register(subscriberObject: ViewStateSubscriberObject, retain: Bool = false) {
+        let _subscriber = Subscriber(target: subscriberObject, retain: retain)
+        
+        if !subscribers.contains(_subscriber) {
+            subscribers.append(_subscriber)
+            
+            if let target = _subscriber.target {
+                notifyviewStateDidSubscribe(to: target)
+            }
+        }
+    }
+    
     public func register(subscriber: ViewStateSubscriber) {
-        let id = String(describing: subscriber)
-        let _subscriber = Subscriber(id: id, target: subscriber)
+        let _subscriber = Subscriber(target: subscriber)
         
         if !subscribers.contains(_subscriber) {
             subscribers.append(_subscriber)
@@ -88,7 +123,7 @@ open class ViewState: NSObject, ViewStateSubscriber {
     
     public func unregister(subscriber: ViewStateSubscriber) {
         let id = String(describing: subscriber)
-        if let index = subscribers.index(where: { (scrb) -> Bool in
+        if let index = subscribers.firstIndex(where: { (scrb) -> Bool in
             scrb.id == id
         }) {
             let _subscriber = subscribers[index]

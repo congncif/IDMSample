@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0C2E94A1392EFF181E7237056E6A15F8"
+               BlueprintIdentifier = "3EDBA28C056B697A5AA81A8A431C5FB0"
                BuildableName = "ViewStateCore.framework"
                BlueprintName = "ViewStateCore"
                ReferencedContainer = "container:Pods.xcodeproj">

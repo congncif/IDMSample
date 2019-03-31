@@ -2,7 +2,7 @@
 //  SearchUserExtensions.swift
 //  IDMSample
 //
-//  Created by NGUYEN CHI CONG on 3/2/19.
+//  Created by NGUYEN CHI CONG on 3/31/19.
 //  Copyright © 2019 [iF] Solution. All rights reserved.
 //
 
@@ -10,38 +10,25 @@ import Foundation
 import IDMCore
 import IDMFoundation
 
-/*Always put every application logic in extensions of protocols*/
+/* Always put every application logic in extensions of protocols */
+
+// MARK: - Controller
 
 extension SearchUserControllerProtocol {
     func performSearch() {
         let param = SearchUserParameter(q: presenter.currentQuery())
         integrator.prepareCall(parameters: param)
-            .loadingHandler(presenter.loadingHandler)
+            .loadingHandler(presenter.dataLoadingHandler)
             .errorHandler(presenter.errorHandler)
-            .dataProcessor(presenter.dataProcessor)
+            .dataProcessor(presenter.dataResponseHandler)
             .call()
     }
 }
 
-extension SearchUserViewActionDelegate where Self: SearchUserControllerProtocol {
-    func refresh() {
-        performSearch()
-    }
-    
-    func viewReady() {
-        performSearch()
-    }
-}
-
-extension SearchUserViewActionDelegate where Self: SearchUserControllerProtocol, Self: SearchUserModuleInterface {
-    func listItemDidSelect(at index: Int) {
-        let model = presenter.user(at: index)
-        output?.userDidSelect(model)
-    }
-}
+// MARK: - Presenter
 
 extension SearchUserPresenterProtocol {
-    var dataProcessor: DataProcessor<SearchUserResponseModel> {
+    var dataResponseHandler: DataProcessor<SearchUserResponseModel> {
         return DataProcessor<SearchUserResponseModel>(dataProcessing: { data in
             let originItems = data?.items ?? []
             let items: [SearchUserModel] = originItems.map { item in
@@ -54,5 +41,11 @@ extension SearchUserPresenterProtocol {
             }
             self.setUsers(items)
         })
+    }
+}
+
+extension SearchUserPresenterProtocol where Self: MultipleErrorHandlingProtocol {
+    var errorHandler: ErrorHandlingProtocol {
+        return errorHandlingProxy
     }
 }

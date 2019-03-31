@@ -12,21 +12,15 @@ public protocol LoadingProtocol {
     func finishLoading()
 }
 
-public protocol LoadingObjectProtocol: AnyObject, LoadingProtocol {}
-
 public protocol ProgressLoadingProtocol {
     func beginProgressLoading()
     func loadingDidUpdateProgress(_ progress: Progress?)
     func finishProgressLoading()
 }
 
-public protocol ProgressLoadingObjectProtocol: AnyObject, ProgressLoadingProtocol {}
-
 public protocol ErrorHandlingProtocol {
     func handle(error: Error?)
 }
-
-public protocol ErrorHandlingObjectProtocol: AnyObject, ErrorHandlingProtocol {}
 
 public protocol DataProcessingProtocol {
     associatedtype ModelType
@@ -90,6 +84,16 @@ public struct LoadingHandler: LoadingProtocol {
     }
 }
 
+extension LoadingHandler {
+    public init<Handler>(handlerObject: Handler) where Handler: LoadingProtocol, Handler: AnyObject {
+        self.init(beginHandler: { [weak handlerObject] in
+            handlerObject?.beginLoading()
+        }, finishHandler: { [weak handlerObject] in
+            handlerObject?.finishLoading()
+        })
+    }
+}
+
 public struct ProgressLoadingHandler: ProgressLoadingProtocol {
     private let beginHandler: () -> Void
     private let finishHandler: () -> Void
@@ -116,6 +120,18 @@ public struct ProgressLoadingHandler: ProgressLoadingProtocol {
     }
 }
 
+extension ProgressLoadingHandler {
+    public init<Handler>(handlerObject: Handler) where Handler: ProgressLoadingProtocol, Handler: AnyObject {
+        self.init(beginHandler: { [weak handlerObject] in
+            handlerObject?.beginProgressLoading()
+        }, updateHandler: { [weak handlerObject] in
+            handlerObject?.loadingDidUpdateProgress($0)
+        }, finishHandler: { [weak handlerObject] in
+            handlerObject?.finishProgressLoading()
+        })
+    }
+}
+
 public struct ErrorHandler: ErrorHandlingProtocol {
     private let handler: (Error?) -> Void
 
@@ -128,81 +144,28 @@ public struct ErrorHandler: ErrorHandlingProtocol {
     }
 }
 
-public struct ErrorHandlingProxy: ErrorHandlingProtocol {
-    private var handlersDict: [String: ErrorHandlingProtocol]
-    private var errorConditions: [String: (Error?) -> Bool] = [:]
-
-    public init(handlers: [ErrorHandlingProtocol] = []) {
-        let payload = handlers.map { (key: String(describing: $0), value: $0) }
-        handlersDict = payload.reduce([:]) { result, item in
-            var newResult = result
-            newResult[item.key] = item.value
-            return newResult
-        }
-    }
-
-    private var handlers: [ErrorHandlingProtocol] {
-        return Array(handlersDict.values)
-    }
-
-    public func handle(error: Error?) {
-        handlers.forEach {
-            let key = String(describing: $0)
-            if let condition = errorConditions[key] {
-                if condition(error) {
-                    $0.handle(error: error)
-                }
-            } else {
-                $0.handle(error: error)
-            }
-        }
-    }
-
-    public mutating func addHandler(_ handler: ErrorHandlingProtocol,
-                                    where condition: ((Error?) -> Bool)? = nil) {
-        let key = String(describing: handler)
-        handlersDict[key] = handler
-        errorConditions[key] = condition
-    }
-
-    public mutating func removeHandler(_ handler: ErrorHandlingProtocol) {
-        let key = String(describing: handler)
-        handlersDict.removeValue(forKey: key)
-        errorConditions.removeValue(forKey: key)
-    }
-
-    public mutating func removeAllHandlers() {
-        handlersDict.removeAll()
-        errorConditions.removeAll()
-    }
-}
-
-extension LoadingObjectProtocol {
-    public func asValueType() -> LoadingProtocol {
-        return LoadingHandler(beginHandler: { [weak self] in
-            self?.beginLoading()
-        }, finishHandler: { [weak self] in
-            self?.finishLoading()
-        })
-    }
-}
-
-extension ErrorHandlingObjectProtocol {
-    public func asValueType() -> ErrorHandlingProtocol {
-        return ErrorHandler { [weak self] in
-            self?.handle(error: $0)
+extension ErrorHandler {
+    public init<Handler>(handlerObject: Handler) where Handler: ErrorHandlingProtocol, Handler: AnyObject {
+        self.init { [weak handlerObject] in
+            handlerObject?.handle(error: $0)
         }
     }
 }
 
-extension ProgressLoadingObjectProtocol {
-    public func asValueType() -> ProgressLoadingProtocol {
-        return ProgressLoadingHandler(beginHandler: { [weak self] in
-            self?.beginProgressLoading()
-        }, updateHandler: { [weak self] in
-            self?.loadingDidUpdateProgress($0)
-        }, finishHandler: { [weak self] in
-            self?.finishProgressLoading()
-        })
+extension LoadingProtocol where Self: AnyObject {
+    public func asLoadingHandler() -> LoadingProtocol {
+        return LoadingHandler(handlerObject: self)
+    }
+}
+
+extension ErrorHandlingProtocol where Self: AnyObject {
+    public func asErrorHandler() -> ErrorHandlingProtocol {
+        return ErrorHandler(handlerObject: self)
+    }
+}
+
+extension ProgressLoadingProtocol where Self: AnyObject {
+    public func asProgressLoadingHandler() -> ProgressLoadingProtocol {
+        return ProgressLoadingHandler(handlerObject: self)
     }
 }

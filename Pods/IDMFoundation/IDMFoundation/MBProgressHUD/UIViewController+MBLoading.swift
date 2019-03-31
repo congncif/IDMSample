@@ -12,7 +12,7 @@ import MBProgressHUD
 import SiFUtilities
 import UIKit
 
-extension LoadingObjectProtocol where Self: UIView {
+extension LoadingProtocol where Self: UIView {
     public func beginLoading() {
         let hud = MBProgressHUD.showAdded(to: self, animated: true)
         hud.label.text = "Loading...".localized
@@ -23,22 +23,7 @@ extension LoadingObjectProtocol where Self: UIView {
     }
 }
 
-extension UIViewController: ErrorHandlingObjectProtocol {
-    @objc open func handle(error: Error?) {
-        guard let error = error else {
-            return
-        }
-        
-        if let err = error as? CommonError {
-            self.notify(title: err.title, message: err.message)
-        } else {
-            let message = error.localizedDescription
-            self.notify(message: message)
-        }
-    }
-}
-
-extension ProgressLoadingObjectProtocol where Self: UIView {
+extension ProgressLoadingProtocol where Self: UIView {
     public func beginProgressLoading() {
         let hud = MBProgressHUD.showAdded(to: self, animated: true)
         hud.label.text = "Loading...".localized
@@ -60,28 +45,29 @@ extension ProgressLoadingObjectProtocol where Self: UIView {
     }
 }
 
-extension UIView: LoadingObjectProtocol, ProgressLoadingObjectProtocol {}
+extension UIView: LoadingProtocol, ProgressLoadingProtocol {}
 
-extension UIViewController: LoadingObjectProtocol {
+extension UIViewController: LoadingProtocol {
     @objc open func beginLoading() {
         view.beginLoading()
     }
-    
+
     @objc open func finishLoading() {
         view.finishLoading()
     }
 }
 
-extension UIViewController: ProgressLoadingObjectProtocol {
+extension UIViewController: ProgressLoadingProtocol {
     @objc open func beginProgressLoading() {
         view.beginProgressLoading()
     }
-    
+
     @objc open func finishProgressLoading() {
         view.finishProgressLoading()
     }
-    
+
     @objc open func loadingDidUpdateProgress(_ progress: Progress?) {
         view.loadingDidUpdateProgress(progress)
     }
 }
+
