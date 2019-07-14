@@ -10,8 +10,7 @@ import IDMCore
 import UIKit
 
 extension ErrorHandlingProtocol where Self: UIViewController {
-    public func handle(error: Error?) {
-        guard let error = error else { return }
+    public func handle(error: Error) {
         showErrorAlert(error)
     }
 }

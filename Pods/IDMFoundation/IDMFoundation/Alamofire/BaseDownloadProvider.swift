@@ -16,18 +16,19 @@ public typealias DownloadRequestAdapter = NetworkRequestAdapter<DownloadRequest>
 extension NetworkResponseHandler where BaseRequest == DownloadRequest {
     public static let `default` = NetworkResponseHandler<DownloadRequest>(handler: { request, completion in
         request.downloadProgress { progress in
-            completion(true, progress, nil)
+            completion(.success(progress))
         }
-        
+
         request.response { response in
             let error = response.error
             let isSuccess = error == nil
             if isSuccess {
                 log(url: response.response?.url, mark: "🌸", data: response.destinationURL?.absoluteString)
+                completion(.success(response))
             } else {
                 log(url: response.response?.url, mark: "🥀", data: response.error)
+                completion(.failure(error.unwrapped(UnknownError.default)))
             }
-            completion(isSuccess, response, error)
         }
     })
 }
@@ -41,10 +42,10 @@ open class BaseDownloadProvider<Parameter>: NetworkDataProvider<DownloadRequest,
                          sessionManager: SessionManager = .background) {
         super.init(route: route, parameterEncoder: parameterEncoder, urlRequestAdapters: urlRequestAdapters, requestAdapter: requestAdapter, responseHandler: responseHandler, sessionManager: sessionManager)
     }
-    
+
     open override func buildRequest(with parameters: Parameter?) throws -> DownloadRequest {
         var newRequest = try buildEncodedRequest(with: parameters)
-        
+
         let dataRequest = sessionManager.download(newRequest) { (_, response) -> (destinationURL: URL, options: DownloadRequest.DownloadOptions) in
             if let desUrl = parameters?.destinationUrl(suggestedFilename: response.suggestedFilename) {
                 return (desUrl, [.removePreviousFile, .createIntermediateDirectories])
@@ -55,10 +56,10 @@ open class BaseDownloadProvider<Parameter>: NetworkDataProvider<DownloadRequest,
             }
         }
         log(url: newRequest.url, mark: "📦", data: parameters?.payload)
-        
+
         return dataRequest
     }
-    
+
     open override func cancelRequest(_ request: DownloadRequest) {
         request.cancel()
     }

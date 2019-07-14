@@ -1,0 +1,44 @@
+Alamofire:
+  LABEL: Alamofire
+  PROJECT_PATH: "/Users/congncif/Documents/Frameworks/IDMSample/Pods/Alamofire.xcodeproj"
+  UUID: 81B7E9B7CD0CADA087A4BB042FBA92E7
+IDMCore:
+  LABEL: IDMCore
+  PROJECT_PATH: "/Users/congncif/Documents/Frameworks/IDMSample/Pods/IDMCore.xcodeproj"
+  UUID: 3574CE45A86CE5A5B217E3834342BBA7
+IDMFoundation:
+  LABEL: IDMFoundation
+  PROJECT_PATH: "/Users/congncif/Documents/Frameworks/IDMSample/Pods/IDMFoundation.xcodeproj"
+  UUID: 8843542DE30D6ABCA6908BCC7CE9AD77
+Localize-Swift:
+  LABEL: Localize-Swift
+  PROJECT_PATH: "/Users/congncif/Documents/Frameworks/IDMSample/Pods/Localize-Swift.xcodeproj"
+  UUID: 6C27EEC63FEC06A9DAB03531B0989F47
+MBProgressHUD:
+  LABEL: MBProgressHUD
+  PROJECT_PATH: "/Users/congncif/Documents/Frameworks/IDMSample/Pods/MBProgressHUD.xcodeproj"
+  UUID: 0F48A71D28991325602E8C8A19DF1F64
+ModuleX:
+  LABEL: ModuleX
+  PROJECT_PATH: "/Users/congncif/Documents/Frameworks/IDMSample/Pods/ModuleX.xcodeproj"
+  UUID: BDA3C472DA6FF7751936523AC79F48BE
+ObjectMapper:
+  LABEL: ObjectMapper
+  PROJECT_PATH: "/Users/congncif/Documents/Frameworks/IDMSample/Pods/ObjectMapper.xcodeproj"
+  UUID: 4F38DD1163EAAAC1A648D52404EA8805
+Pods-IDMSample:
+  LABEL: Pods-IDMSample
+  PROJECT_PATH: "/Users/congncif/Documents/Frameworks/IDMSample/Pods/Pods.xcodeproj"
+  UUID: 4AB66BF20A1FFE1AF6C6334D3EABA0B4
+SDWebImage:
+  LABEL: SDWebImage
+  PROJECT_PATH: "/Users/congncif/Documents/Frameworks/IDMSample/Pods/SDWebImage.xcodeproj"
+  UUID: 4ECF4E662EEBE4FA58102FF984D920CC
+SiFUtilities:
+  LABEL: SiFUtilities
+  PROJECT_PATH: "/Users/congncif/Documents/Frameworks/IDMSample/Pods/SiFUtilities.xcodeproj"
+  UUID: 8E2F074A5D5DE5CE4B4135A25D0F7B41
+ViewStateCore:
+  LABEL: ViewStateCore
+  PROJECT_PATH: "/Users/congncif/Documents/Frameworks/IDMSample/Pods/ViewStateCore.xcodeproj"
+  UUID: B46B52A582E14BDFC09BD34BD719682C

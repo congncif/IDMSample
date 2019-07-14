@@ -13,7 +13,7 @@ public protocol DedicatedErrorHandlingProtocol {
 }
 
 extension ErrorHandlingProtocol where Self: DedicatedErrorHandlingProtocol {
-    public func handle(error: Error?) {
+    public func handle(error: Error) {
         guard let dedicatedError = error as? ErrorType else { return }
         handleDedicatedError(dedicatedError)
     }
@@ -21,18 +21,19 @@ extension ErrorHandlingProtocol where Self: DedicatedErrorHandlingProtocol {
 
 public struct DedicatedErrorHandler<E>: DedicatedErrorHandlingProtocol, ErrorHandlingProtocol {
     public typealias ErrorType = E
+    public typealias Handler = (ErrorType) -> Void
 
-    private var handler: ((ErrorType) -> Void)?
+    private var handler: Handler
 
-    public init(errorType: ErrorType.Type, handler: ((ErrorType) -> Void)? = nil) {
+    public init(errorType: ErrorType.Type, handler: @escaping Handler) {
         self.handler = handler
     }
 
-    public init(handler: ((ErrorType) -> Void)? = nil) {
+    public init(handler: @escaping Handler) {
         self.handler = handler
     }
 
     public func handleDedicatedError(_ error: ErrorType) {
-        handler?(error)
+        handler(error)
     }
 }

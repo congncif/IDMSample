@@ -33,8 +33,7 @@ public protocol SearchUserOutputProtocol {
 /// Internal
 
 protocol SearchUserViewActionDelegate: AnyObject {
-    func viewReady()
-    
+    func activeView()
     func listItemDidSelect(at index: Int)
     func refresh()
 }

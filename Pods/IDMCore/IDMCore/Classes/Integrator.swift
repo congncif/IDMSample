@@ -85,9 +85,10 @@ open class Integrator<IntegrateProvider: DataProviderProtocol, IntegrateModel: M
 
     open var dataProvider: DataProviderType
     open var executingType: IntegrationType
-    open var noValueError: Error?
 
-    fileprivate var debouncedFunction: Debouncer? // only valid for latest executing
+    fileprivate var debouncedSource: DispatchDebouncer? // only valid for latest executing
+    fileprivate var debouncedDelay: TimeInterval = 0
+
     fileprivate var defaultCall = IntegrationCall<ResultType>()
     fileprivate var retryCall = IntegrationCall<ResultType>()
     fileprivate var retrySetBlock: ((IntegrationCall<ResultType>) -> Void)?
@@ -102,7 +103,7 @@ open class Integrator<IntegrateProvider: DataProviderProtocol, IntegrateModel: M
                 executingType: IntegrationType = .default) {
         self.dataProvider = dataProvider
         self.executingType = executingType
-        queueRunning = AtomicBool(queue: DispatchQueue.idmConcurrent)
+        queueRunning = AtomicBool()
         callInfosQueue = SynchronizedArray<CallInfo>(queue: preparingQueue, elements: [])
         runningCallsQueue = SynchronizedArray<CallInfo>(queue: executingQueue, elements: [])
 
@@ -135,18 +136,30 @@ open class Integrator<IntegrateProvider: DataProviderProtocol, IntegrateModel: M
         DispatchQueue.main.async {
             task.loading?()
         }
-        let cancel = dataProvider.request(parameters: task.parameters) { [weak self] success, data, error in
-            guard let this = self else {
-                return
+
+        let cancel = dataProvider.request(parameters: task.parameters) { [weak self] result in
+            guard let self = self else { return }
+            var success: Bool
+            var data: IntegrateProvider.DataType?
+            var error: Error?
+
+            switch result {
+            case .success(let _data):
+                success = true
+                data = _data
+            case .failure(let _error):
+                success = false
+                error = _error
             }
-            self?.finish(success: success, data: data, error: error) { [weak this] s, d, e in
-                // forward results
+
+            self.finish(success: success, data: data, error: error) { [weak self] s, d, e in
                 DispatchQueue.main.async {
                     task.completion?(s, d, e)
                 }
-                this?.dequeueTask(task)
+                self?.dequeueTask(task)
             }
         }
+
         task.cancel = cancel
         enqueueTask(task)
     }
@@ -171,8 +184,10 @@ open class Integrator<IntegrateProvider: DataProviderProtocol, IntegrateModel: M
             callInfosQueue.removeAll { [weak self] _ in
                 guard let self = self else { return }
                 self.callInfosQueue.append(info)
-                if let executer = self.debouncedFunction {
-                    DispatchQueue.main.async(execute: executer.call)
+                if let executer = self.debouncedSource {
+                    executer.call(delay: self.debouncedDelay, execute: { [weak self] in
+                        self?.prepareExecute()
+                    })
                 } else {
                     self.prepareExecute()
                 }
@@ -309,16 +324,15 @@ open class Integrator<IntegrateProvider: DataProviderProtocol, IntegrateModel: M
 
     /*********************************************************************************/
     @discardableResult
-    public func throttle(delay: Double = 0.5) -> Self {
+    public func throttle(delay: TimeInterval = 0.5) -> Self {
         switch executingType {
         case .latest:
-            debouncedFunction?.cancel()
-            debouncedFunction = nil
+            debouncedSource?.cancel()
+            debouncedSource = nil
 
             if delay > 0 {
-                debouncedFunction = Debouncer(delay: delay) { [weak self] in
-                    self?.prepareExecute()
-                }
+                debouncedSource = DispatchDebouncer(queue: .serial)
+                debouncedDelay = delay
             }
         default:
             print("\(#function) is only valid with .latest executingType")
@@ -333,13 +347,13 @@ open class Integrator<IntegrateProvider: DataProviderProtocol, IntegrateModel: M
     }
 
     @discardableResult
-    public func onSuccess(_ handler: ((ResultType?) -> Void)?) -> Self {
+    public func onSuccess(_ handler: ((ResultType) -> Void)?) -> Self {
         _ = defaultCall.onSuccess(handler)
         return self
     }
 
     @discardableResult
-    public func onError(_ handler: ((Error?) -> Void)?) -> Self {
+    public func onError(_ handler: ((Error) -> Void)?) -> Self {
         _ = defaultCall.onError(handler)
         return self
     }
@@ -396,7 +410,7 @@ open class Integrator<IntegrateProvider: DataProviderProtocol, IntegrateModel: M
     }
 
     open override func cancel() {
-        debouncedFunction?.cancel()
+        debouncedSource?.cancel()
         callInfosQueue.removeAll()
         cancelCurrentTasks()
 

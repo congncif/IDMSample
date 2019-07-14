@@ -16,17 +16,18 @@ public typealias UploadRequestAdapter = NetworkRequestAdapter<UploadRequest>
 extension NetworkResponseHandler where BaseRequest == UploadRequest {
     public static let `default` = NetworkResponseHandler<UploadRequest>(handler: { request, completion in
         request.uploadProgress { progress in
-            completion(true, progress, nil)
+            completion(.success(progress))
         }
-        
+
         request.responseJSON { response in
             let isSuccess = response.result.isSuccess
             if isSuccess {
                 log(url: response.response?.url, mark: "🌸", data: response.value)
+                completion(.success(response.value))
             } else {
                 log(url: response.response?.url, mark: "🥀", data: response.error)
+                completion(.failure(response.error.unwrapped(UnknownError.default)))
             }
-            completion(isSuccess, response.value, response.error)
         }
     })
 }
@@ -34,7 +35,7 @@ extension NetworkResponseHandler where BaseRequest == UploadRequest {
 open class BaseUploadProvider<Parameter>: NetworkDataProvider<UploadRequest, Parameter>
     where Parameter: UploadFilesParameterProtocol, Parameter: URLBuildable {
     public var encoding: (MultipartFormData, Parameter?) -> Void
-    
+
     public init(route: NetworkRequestRoutable,
                 parameterEncoding: @escaping (MultipartFormData, Parameter?) -> Void = {
                     guard let param = $1 else { return }
@@ -52,11 +53,10 @@ open class BaseUploadProvider<Parameter>: NetworkDataProvider<UploadRequest, Par
                    responseHandler: responseHandler,
                    sessionManager: sessionManager)
     }
-    
+
     private weak var request: UploadRequest? // hack to buildRequest, just refer don't keep alive
-    
-    open override func request(parameters: Parameter?,
-                               completion: @escaping (Bool, Any?, Error?) -> Void) -> CancelHandler? {
+
+    open override func request(parameters: Parameter?, completionResult: @escaping (ResultType) -> Void) -> CancelHandler? {
         do {
             let newRequest = try self.buildAdaptiveURLRequest(with: parameters) // don't encode parameters
             log(url: newRequest.url, mark: "📦", data: parameters?.query?.queryParameters)
@@ -68,32 +68,32 @@ open class BaseUploadProvider<Parameter>: NetworkDataProvider<UploadRequest, Par
                     self.request = upload
                     self.request = try? self.buildFinalRequest(with: parameters)
                     if let _request = self.request {
-                        self.processRequest(_request, completion: completion)
+                        self.processRequest(_request, completion: completionResult)
                     } else {
-                        completion(false, nil, nil)
+                        completionResult(.failure(UnknownError.default))
                     }
                 case .failure(let encodingError):
-                    completion(false, nil, encodingError)
+                    completionResult(.failure(encodingError))
                 }
             }
         } catch let exception {
-            completion(false, nil, exception)
+            completionResult(.failure(exception))
         }
-        
+
         let cancelHandler: CancelHandler? = { [weak self] in
             guard let self = self, let _request = self.request else { return }
             self.cancelRequest(_request)
         }
         return cancelHandler
     }
-    
+
     open override func buildRequest(with parameters: Parameter?) throws -> UploadRequest {
         if let _request = request {
             return _request
         }
         throw CommonError(message: "Cannot buildRequest".localized())
     }
-    
+
     open override func cancelRequest(_ request: UploadRequest) {
         request.cancel()
     }

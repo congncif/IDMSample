@@ -27,6 +27,6 @@ public final class SearchUserViewController: UIViewController, SearchUserControl
 
 extension SearchUserViewController: SearchUserViewActionDelegate {
     public override func viewDidFinishInitialLayout() {
-        viewReady()
+        activeView()
     }
 }

@@ -19,12 +19,12 @@ public protocol ProgressLoadingProtocol {
 }
 
 public protocol ErrorHandlingProtocol {
-    func handle(error: Error?)
+    func handle(error: Error)
 }
 
 public protocol DataProcessingProtocol {
     associatedtype ModelType
-    func process(data: ModelType?)
+    func process(data: ModelType)
 }
 
 public protocol ProgressTrackingProtocol {
@@ -41,27 +41,27 @@ public protocol ProgressModelProtocol: DelayingCompletionProtocol {
 }
 
 public protocol ProgressDataModelProtocol: ProgressModelProtocol {
-    associatedtype D
+    associatedtype DataModel
 
-    var data: D? { get set }
+    var data: DataModel { get set }
 }
 
 open class AbstractDataProcessor<ModelType>: DataProcessingProtocol {
     public init() {}
 
-    open func process(data: ModelType?) {
+    open func process(data: ModelType) {
         assertionFailure("Need override function \(#function) to process data: \(String(describing: data))")
     }
 }
 
 public struct DataProcessor<ModelType>: DataProcessingProtocol {
-    public var dataProcessing: (ModelType?) -> Void
+    public var dataProcessing: (ModelType) -> Void
 
-    public init(dataProcessing: @escaping (ModelType?) -> Void) {
+    public init(dataProcessing: @escaping (ModelType) -> Void) {
         self.dataProcessing = dataProcessing
     }
 
-    public func process(data: ModelType?) {
+    public func process(data: ModelType) {
         dataProcessing(data)
     }
 }
@@ -133,13 +133,13 @@ extension ProgressLoadingHandler {
 }
 
 public struct ErrorHandler: ErrorHandlingProtocol {
-    private let handler: (Error?) -> Void
+    private let handler: (Error) -> Void
 
-    public init(handler: @escaping (Error?) -> Void) {
+    public init(handler: @escaping (Error) -> Void) {
         self.handler = handler
     }
 
-    public func handle(error: Error?) {
+    public func handle(error: Error) {
         handler(error)
     }
 }

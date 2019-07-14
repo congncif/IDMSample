@@ -53,33 +53,37 @@ public func >><< <A, B, C, D, E: DataProviderProtocol>(left: Group4DataProvider<
 //////////////////////////////////////////////////////////////////////////////////////
 
 extension DataProviderProtocol {
+    typealias SubResultType<S: DataProviderProtocol> = SimpleResult<S.DataType?>
+
     func requestSubItem<S: DataProviderProtocol>(sub: S,
                                                  grouptasks: DispatchGroup,
                                                  parameter: S.ParameterType?,
-                                                 cancelBlocks: inout [(() -> Void)],
-                                                 done: @escaping (Bool, S.DataType?, Error?) -> Void) {
-        var resultLocal: S.DataType?
-        var successLocal = true
-        var errorLocal: Error?
-
+                                                 cancelBlocks: inout [() -> Void],
+                                                 done: @escaping (SubResultType<S>) -> Void) {
         grouptasks.enter()
 
-        let cancel = sub.request(parameters: parameter) { success, data, error in
-
-            defer {
-                done(successLocal, resultLocal, errorLocal)
-                grouptasks.leave()
-            }
-
-            successLocal = successLocal && success
-            if !successLocal {
-                errorLocal = errorLocal ?? error
-            } else {
-                resultLocal = data
-            }
+        let cancel = sub.request(parameters: parameter) { result in
+            done(result)
+            grouptasks.leave()
         }
-        if cancel != nil {
-            cancelBlocks.append(cancel!)
+
+        if let _cancel = cancel {
+            cancelBlocks.append(_cancel)
+        }
+    }
+
+    func requestSubItem<S: DataProviderProtocol>(sub: S,
+                                                 grouptasks: DispatchGroup,
+                                                 parameter: S.ParameterType?,
+                                                 cancelBlocks: inout [() -> Void],
+                                                 done: @escaping (Bool, S.DataType?, Error?) -> Void) {
+        requestSubItem(sub: sub, grouptasks: grouptasks, parameter: parameter, cancelBlocks: &cancelBlocks) { result in
+            switch result {
+            case .success(let data):
+                done(true, data, nil)
+            case .failure(let error):
+                done(false, nil, error)
+            }
         }
     }
 
@@ -109,7 +113,7 @@ public class GroupDataProvider<FirstProvider: DataProviderProtocol, SecondProvid
 
     @discardableResult
     public func request(parameters: ParameterType?, completion: @escaping (Bool, DataType?, Error?) -> Void) -> CancelHandler? {
-        var cancelBlocks: [(() -> Void)] = []
+        var cancelBlocks: [() -> Void] = []
 
         var resultsSuccess = true
         var resultsError: Error?
@@ -126,7 +130,7 @@ public class GroupDataProvider<FirstProvider: DataProviderProtocol, SecondProvid
             self?.processSubRequestDone(success: &resultsSuccess, result: &result2, error: &resultsError, s: s, d: d, e: e)
         }
 
-        grouptasks.notify(queue: DispatchQueue.global(qos: .userInteractive)) {
+        grouptasks.notify(queue: DispatchQueue.global(qos: .userInitiated)) {
             let results: DataType = (result1, result2)
             DispatchQueue.main.async {
                 completion(resultsSuccess, results, resultsError)
@@ -138,6 +142,20 @@ public class GroupDataProvider<FirstProvider: DataProviderProtocol, SecondProvid
             for cancel in cancelBlocks {
                 cancel()
             }
+        }
+    }
+
+    public func request(parameters: (FirstProvider.ParameterType?, SecondProvider.ParameterType?)?, completionResult: @escaping (ResultType) -> Void) -> CancelHandler? {
+        return request(parameters: parameters) { success, data, error in
+            var result: ResultType
+            if success {
+                result = .success(data)
+            } else if let error = error {
+                result = .failure(error)
+            } else {
+                result = .failure(UnknownError.default)
+            }
+            completionResult(result)
         }
     }
 }
@@ -158,7 +176,7 @@ public class Group3DataProvider<A: DataProviderProtocol, B: DataProviderProtocol
 
     @discardableResult
     public func request(parameters: ParameterType?, completion: @escaping (Bool, DataType?, Error?) -> Void) -> CancelHandler? {
-        var cancelBlocks: [(() -> Void)] = []
+        var cancelBlocks: [() -> Void] = []
 
         var resultsSuccess = true
         var resultsError: Error?
@@ -180,7 +198,7 @@ public class Group3DataProvider<A: DataProviderProtocol, B: DataProviderProtocol
             self?.processSubRequestDone(success: &resultsSuccess, result: &result3, error: &resultsError, s: s, d: d, e: e)
         }
 
-        grouptasks.notify(queue: DispatchQueue.global(qos: .userInteractive)) {
+        grouptasks.notify(queue: DispatchQueue.global(qos: .userInitiated)) {
             let results: DataType = (result1, result2, result3)
             DispatchQueue.main.async {
                 completion(resultsSuccess, results, resultsError)
@@ -192,6 +210,20 @@ public class Group3DataProvider<A: DataProviderProtocol, B: DataProviderProtocol
             for cancel in cancelBlocks {
                 cancel()
             }
+        }
+    }
+
+    public func request(parameters: ParameterType?, completionResult: @escaping (ResultType) -> Void) -> CancelHandler? {
+        return request(parameters: parameters) { success, data, error in
+            var result: ResultType
+            if success {
+                result = .success(data)
+            } else if let error = error {
+                result = .failure(error)
+            } else {
+                result = .failure(UnknownError.default)
+            }
+            completionResult(result)
         }
     }
 }
@@ -210,8 +242,22 @@ public class Group4DataProvider<A: DataProviderProtocol, B: DataProviderProtocol
         self.secondProvider = secondProvider
     }
 
+    public func request(parameters: ParameterType?, completionResult: @escaping (ResultType) -> Void) -> CancelHandler? {
+        return request(parameters: parameters) { success, data, error in
+            var result: ResultType
+            if success {
+                result = .success(data)
+            } else if let error = error {
+                result = .failure(error)
+            } else {
+                result = .failure(UnknownError.default)
+            }
+            completionResult(result)
+        }
+    }
+
     public func request(parameters: ParameterType?, completion: @escaping (Bool, DataType?, Error?) -> Void) -> CancelHandler? {
-        var cancelBlocks: [(() -> Void)] = []
+        var cancelBlocks: [() -> Void] = []
 
         var resultsSuccess = true
         var resultsError: Error?
@@ -238,7 +284,7 @@ public class Group4DataProvider<A: DataProviderProtocol, B: DataProviderProtocol
             self?.processSubRequestDone(success: &resultsSuccess, result: &result4, error: &resultsError, s: s, d: d, e: e)
         }
 
-        grouptasks.notify(queue: DispatchQueue.global(qos: .userInteractive)) {
+        grouptasks.notify(queue: DispatchQueue.global(qos: .userInitiated)) {
             let results: DataType = (result1, result2, result3, result4)
             DispatchQueue.main.async {
                 completion(resultsSuccess, results, resultsError)
@@ -268,8 +314,22 @@ public class Group5DataProvider<A: DataProviderProtocol, B: DataProviderProtocol
         self.secondProvider = secondProvider
     }
 
+    public func request(parameters: ParameterType?, completionResult: @escaping (ResultType) -> Void) -> CancelHandler? {
+        return request(parameters: parameters) { success, data, error in
+            var result: ResultType
+            if success {
+                result = .success(data)
+            } else if let error = error {
+                result = .failure(error)
+            } else {
+                result = .failure(UnknownError.default)
+            }
+            completionResult(result)
+        }
+    }
+
     public func request(parameters: ParameterType?, completion: @escaping (Bool, DataType?, Error?) -> Void) -> CancelHandler? {
-        var cancelBlocks: [(() -> Void)] = []
+        var cancelBlocks: [() -> Void] = []
 
         var resultsSuccess = true
         var resultsError: Error?
@@ -301,7 +361,7 @@ public class Group5DataProvider<A: DataProviderProtocol, B: DataProviderProtocol
             self?.processSubRequestDone(success: &resultsSuccess, result: &result5, error: &resultsError, s: s, d: d, e: e)
         }
 
-        grouptasks.notify(queue: DispatchQueue.global(qos: .userInteractive)) {
+        grouptasks.notify(queue: DispatchQueue.global(qos: .userInitiated)) {
             let results: DataType = (result1, result2, result3, result4, result5)
             DispatchQueue.main.async {
                 completion(resultsSuccess, results, resultsError)

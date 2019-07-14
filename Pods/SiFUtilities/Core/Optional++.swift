@@ -10,18 +10,20 @@ import Foundation
 extension Optional where Wrapped == String {
     public var isNoValue: Bool {
         switch self {
-        case .none: return true
-        case .some(let value): return value.isEmpty
+        case .none:
+            return true
+        case .some(let value):
+            return value.isEmpty
         }
     }
 
-    public func unwrapped(default: String = String()) -> String {
+    public func unwrapped(_ default: String = String()) -> String {
         return self ?? `default`
     }
 }
 
 extension Optional {
-    public func unwrapped(default: Wrapped) -> Wrapped {
+    public func unwrapped(_ default: Wrapped) -> Wrapped {
         return self ?? `default`
     }
 }

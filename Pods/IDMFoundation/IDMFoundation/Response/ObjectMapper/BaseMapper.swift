@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import IDMCore
 import ObjectMapper
 
 public struct MappableError: LocalizedError {
@@ -15,7 +16,7 @@ public struct MappableError: LocalizedError {
     }
 }
 
-extension BaseMappable {
+extension ModelProtocol where Self: BaseMappable {
     public init(fromData data: Any?) throws {
         guard let data = data else {
             throw MappableError()

@@ -44,7 +44,7 @@ public protocol SelfModelProtocol: ModelProtocol {}
 extension SelfModelProtocol {
     public init(fromData data: Self?) throws {
         guard let data = data else {
-            throw IDMError.modelCannotInitialize
+            throw ParsingError(message: "Model cannot initialize")
         }
         self = data
     }
@@ -52,12 +52,10 @@ extension SelfModelProtocol {
 
 extension ModelProtocol {
     public func getData<ReturnType>() throws -> ReturnType {
-        if ReturnType.self == Self.self {
-            if let result = self as? ReturnType {
-                return result
-            }
+        if let result = self as? ReturnType {
+            return result
         }
-        throw IDMError(message: "*** Cannot getData of type \(Self.self) ***")
+        throw ParsingError(message: "*** Cannot getData of type \(Self.self) ***")
     }
 
     public var invalidDataError: Error? {
@@ -72,17 +70,12 @@ public struct AutoWrapModel<Type>: ModelProtocol {
     }
 
     public func getData<ReturnType>() throws -> ReturnType {
-        if ReturnType.self == Type.self {
-            if let result = data as? ReturnType {
-                return result
-            }
+        if let result = data as? ReturnType {
+            return result
+        } else if let result = self as? ReturnType {
+            return result
         }
-        if ReturnType.self == AutoWrapModel<Type>.self {
-            if let result = self as? ReturnType {
-                return result
-            }
-        }
-        throw IDMError(message: "*** Cannot getData of type \(Type.self) or \(AutoWrapModel<Type>.self) ***")
+        throw ParsingError(message: "*** Cannot getData of type \(Type.self) or \(AutoWrapModel<Type>.self) ***")
     }
 }
 
@@ -98,7 +91,7 @@ extension ModelProtocol where Self: NSObject, Self: ProgressModelProtocol, Self.
     }
 }
 
-extension ModelProtocol where Self: NSObject, Self: ProgressDataModelProtocol, Self.DataType == Any, Self.D: ModelProtocol, Self.D.DataType == Any {
+extension ModelProtocol where Self: NSObject, Self: ProgressDataModelProtocol, Self.DataType == Any, Self.DataModel: ModelProtocol, Self.DataModel.DataType == Any {
     public init(fromData data: Any?) throws {
         self.init()
         if let _progress = data as? Progress {
@@ -107,7 +100,7 @@ extension ModelProtocol where Self: NSObject, Self: ProgressDataModelProtocol, S
         } else {
             isDelaying = false
             do {
-                self.data = try D(fromData: data)
+                self.data = try DataModel(fromData: data)
             } catch let ex {
                 throw ex
             }
@@ -123,7 +116,7 @@ extension ModelProtocol where Self: NSObject, Self: ProgressDataModelProtocol, S
             isDelaying = true
         } else {
             isDelaying = false
-            if let res = data as? D {
+            if let res = data as? DataModel {
                 self.data = res
             }
         }

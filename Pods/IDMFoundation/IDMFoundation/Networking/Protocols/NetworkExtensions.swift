@@ -26,19 +26,19 @@ extension RouteRequestBuildable {
 
 extension DataProviderProtocol where Self: FlexibleRequestable, ParameterType == Self.RequestParameterType, DataType == Any {
     public func request(parameters: ParameterType?,
-                        completion: @escaping (Bool, Any?, Error?) -> Void) -> CancelHandler? {
-        return performRequest(with: parameters, completion: completion)
+                        completionResult: @escaping (SimpleResult<Any?>) -> Void) -> CancelHandler? {
+        return performRequest(with: parameters, completion: completionResult)
     }
 
     public func performRequest(with parameters: ParameterType?,
-                               completion: @escaping (Bool, Any?, Error?) -> Void) -> CancelHandler? {
+                               completion: @escaping (SimpleResult<Any?>) -> Void) -> CancelHandler? {
         var cancelHandler: CancelHandler?
         do {
             let dataRequest = try buildFinalRequest(with: parameters)
             processRequest(dataRequest, completion: completion)
             cancelHandler = { self.cancelRequest(dataRequest) }
         } catch let exception {
-            completion(false, nil, exception)
+            completion(.failure(exception))
         }
         return cancelHandler
     }

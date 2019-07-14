@@ -1,0 +1,11 @@
+${PODS_ROOT}/Target Support Files/Pods-IDMSample/Pods-IDMSample-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/IDMCore/IDMCore.framework
+${BUILT_PRODUCTS_DIR}/IDMFoundation/IDMFoundation.framework
+${BUILT_PRODUCTS_DIR}/Localize-Swift/Localize_Swift.framework
+${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework
+${BUILT_PRODUCTS_DIR}/ModuleX/ModuleX.framework
+${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework
+${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
+${BUILT_PRODUCTS_DIR}/SiFUtilities/SiFUtilities.framework
+${BUILT_PRODUCTS_DIR}/ViewStateCore/ViewStateCore.framework

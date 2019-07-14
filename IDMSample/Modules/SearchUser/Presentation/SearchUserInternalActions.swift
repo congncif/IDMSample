@@ -15,7 +15,7 @@ extension SearchUserViewActionDelegate where Self: SearchUserControllerProtocol 
         performSearch()
     }
     
-    func viewReady() {
+    func activeView() {
         performSearch()
     }
 }

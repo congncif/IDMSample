@@ -30,7 +30,7 @@ extension SearchUserControllerProtocol {
 extension SearchUserPresenterProtocol {
     var dataResponseHandler: DataProcessor<SearchUserResponseModel> {
         return DataProcessor<SearchUserResponseModel>(dataProcessing: { data in
-            let originItems = data?.items ?? []
+            let originItems = data.items ?? []
             let items: [SearchUserModel] = originItems.map { item in
                 let newUser = SearchUserModel()
                 newUser.id = item.id?.stringValue

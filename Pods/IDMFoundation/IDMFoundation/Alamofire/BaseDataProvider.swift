@@ -18,10 +18,11 @@ extension NetworkResponseHandler where BaseRequest == DataRequest {
             let isSuccess = response.result.isSuccess
             if isSuccess {
                 log(url: response.response?.url, mark: "🌸", data: response.value)
+                completion(.success(response.value))
             } else {
                 log(url: response.response?.url, mark: "🥀", data: response.error)
+                completion(.failure(response.error.unwrapped(UnknownError.default)))
             }
-            completion(isSuccess, response.value, response.error)
         }
     })
 }

@@ -7,10 +7,11 @@
 
 import Foundation
 import SiFUtilities
+import IDMCore
 
 // MARK: - #1 Definitions
 
-public typealias AnyResultCompletionHandler = (Bool, Any?, Error?) -> Void
+public typealias AnyResultCompletionHandler = (SimpleResult<Any?>) -> Void
 
 public protocol RequestAdapting {
     associatedtype RequestType

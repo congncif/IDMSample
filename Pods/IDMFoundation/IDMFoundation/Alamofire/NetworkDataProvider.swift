@@ -14,14 +14,14 @@ open class NetworkDataProvider<Request, Parameter>: AnyResultDataProvider<Parame
     public typealias RequestType = Request
     public typealias RequestApdapterType = NetworkRequestAdapter<RequestType>
     public typealias ResponseHandlerType = NetworkResponseHandler<RequestType>
-    
+
     public var route: NetworkRequestRoutable
     public var parameterEncoder: ParameterEncoding
     public var urlRequestAdapters: [URLRequestAdapting]
     public var requestAdapter: RequestApdapterType?
     public var sessionManager: SessionManager
     public var responseHandler: ResponseHandlerType
-    
+
     init(route: NetworkRequestRoutable,
          parameterEncoder: ParameterEncoding = URLEncoding.default,
          urlRequestAdapters: [URLRequestAdapting] = [],
@@ -35,17 +35,16 @@ open class NetworkDataProvider<Request, Parameter>: AnyResultDataProvider<Parame
         self.responseHandler = responseHandler
         self.sessionManager = sessionManager
     }
-    
-    open override func request(parameters: Parameter?,
-                               completion: @escaping (Bool, Any?, Error?) -> Void) -> CancelHandler? {
-        return performRequest(with: parameters, completion: completion)
+
+    open override func request(parameters: Parameter?, completionResult: @escaping (ResultType) -> Void) -> CancelHandler? {
+        return performRequest(with: parameters, completion: completionResult)
     }
-    
+
     // Abstract methods, must override in subclass
     open func buildRequest(with parameters: Parameter?) throws -> Request {
         fatalError("Abstract methods, must override in subclass")
     }
-    
+
     open func cancelRequest(_ request: Request) {
         fatalError("Abstract methods, must override in subclass")
     }

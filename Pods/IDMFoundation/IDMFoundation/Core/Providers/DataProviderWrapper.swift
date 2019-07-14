@@ -9,14 +9,16 @@ import Foundation
 import IDMCore
 
 open class DataProviderWrapper<ProviderType: DataProviderProtocol>: AnyResultDataProvider<ProviderType.ParameterType> where ProviderType.DataType == Any {
+
+
     public var provider: ProviderType?
 
     public init(provider: ProviderType?) {
         self.provider = provider
     }
 
-    open override func request(parameters: ProviderType.ParameterType?, completion: @escaping (Bool, Any?, Error?) -> Void) -> CancelHandler? {
-        return provider?.request(parameters: parameters, completion: completion)
+    open override func request(parameters: ParameterType?, completionResult: @escaping (Result<Any?, Error>) -> Void) -> CancelHandler? {
+        return provider?.request(parameters: parameters, completionResult: completionResult)
     }
 }
 
